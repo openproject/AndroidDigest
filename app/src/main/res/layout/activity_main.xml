@@ -1,0 +1,59 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#dbdbdb"
+    tools:context=".activity.MainActivity" >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:background="#008AC4"
+        android:minHeight="?attr/actionBarSize" />
+
+    <RadioGroup
+        android:id="@+id/tabs"
+        android:gravity="center_vertical"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_width="fill_parent"
+        android:layout_height="?attr/actionBarSize">
+
+        <RadioButton
+            android:id="@+id/tab_home_btn"
+            android:text="@string/tab_home_text"
+            style="@style/TabItemStyle"
+            android:checked="true" />
+
+        <RadioButton
+            android:id="@+id/tab_weixin_btn"
+            android:text="@string/tab_weixin_text"
+            android:visibility="gone"
+            style="@style/TabItemStyle" />
+
+        <RadioButton
+            android:id="@+id/tab_offline_btn"
+            android:text="@string/tab_offline_text"
+            style="@style/TabItemStyle" />
+
+    </RadioGroup>
+
+    <View android:id="@+id/tabs_divider_top"
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:layout_above="@id/tabs"
+        android:background="#aaa"/>
+
+    <LinearLayout
+        android:id="@+id/fragments"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/tabs_divider_top"
+        android:layout_below="@id/toolbar"
+        android:orientation="vertical" >
+    </LinearLayout>
+
+</RelativeLayout>
