@@ -14,6 +14,9 @@ public class Config {
     public static final String JOKE_TYPE_TEXT = "text";
     public static final String JOKE_TYPE_HTML = "html";
 
+    public static final String BLOG_TYPE_DIR = "dir";
+    public static final String BLOG_TYPE_HTML = "html";
+
     public static final String OFFLINE_TYPE_DIR = "dir";
     public static final String OFFLINE_TYPE_HTML = "html";
 
@@ -31,6 +34,10 @@ public class Config {
 
     public static String getDigestDetailUrl(int id) {
         return sDomain + "android/detail.php?id=" + id;
+    }
+
+    public static String getBlogListUrl() {
+        return sDomain + "android/blog/list.json";
     }
 
     public static String getOfflineListUrl() {

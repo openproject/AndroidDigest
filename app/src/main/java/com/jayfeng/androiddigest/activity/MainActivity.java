@@ -10,6 +10,7 @@ import android.widget.CompoundButton;
 import android.widget.RadioButton;
 
 import com.jayfeng.androiddigest.R;
+import com.jayfeng.androiddigest.fragment.BlogFragment;
 import com.jayfeng.androiddigest.fragment.HomeFragment;
 import com.jayfeng.androiddigest.fragment.OfflineFragment;
 import com.jayfeng.lesscode.core.ViewLess;
@@ -26,6 +27,7 @@ public class MainActivity extends ActionBarActivity implements RadioButton.OnChe
 
     private Fragment currentFragment;
     private Fragment homeFragment;
+    private Fragment blogFragment;
     private Fragment offlineFragment;
 
     @Override
@@ -53,6 +55,7 @@ public class MainActivity extends ActionBarActivity implements RadioButton.OnChe
         toolTabBtn.setOnCheckedChangeListener(this);
 
         currentFragment = homeFragment = new HomeFragment();
+        blogFragment = new BlogFragment();
         offlineFragment = new OfflineFragment();
 
         initFragment();
@@ -87,7 +90,7 @@ public class MainActivity extends ActionBarActivity implements RadioButton.OnChe
                     changeFrament(homeFragment);
                     break;
                 case R.id.tab_blog_btn:
-                    changeFrament(offlineFragment);
+                    changeFrament(blogFragment);
                     break;
                 case R.id.tab_tool_btn:
                     changeFrament(offlineFragment);
