@@ -29,14 +29,13 @@
             android:checked="true" />
 
         <RadioButton
-            android:id="@+id/tab_weixin_btn"
-            android:text="@string/tab_weixin_text"
-            android:visibility="gone"
+            android:id="@+id/tab_blog_btn"
+            android:text="@string/tab_blog_text"
             style="@style/TabItemStyle" />
 
         <RadioButton
-            android:id="@+id/tab_offline_btn"
-            android:text="@string/tab_offline_text"
+            android:id="@+id/tab_tool_btn"
+            android:text="@string/tab_tool_text"
             style="@style/TabItemStyle" />
 
     </RadioGroup>

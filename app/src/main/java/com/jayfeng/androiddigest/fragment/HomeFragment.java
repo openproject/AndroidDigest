@@ -19,13 +19,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.jayfeng.androiddigest.R;
-import com.jayfeng.androiddigest.activity.JokeDetailActivity;
+import com.jayfeng.androiddigest.activity.DigestDetailActivity;
 import com.jayfeng.androiddigest.activity.WebViewActivity;
 import com.jayfeng.androiddigest.config.Config;
 import com.jayfeng.androiddigest.service.HttpClientSpiceService;
 import com.jayfeng.androiddigest.webservices.JokeListRequest;
-import com.jayfeng.androiddigest.webservices.json.JokeDetailJson;
-import com.jayfeng.androiddigest.webservices.json.JokeDetailListJson;
+import com.jayfeng.androiddigest.webservices.json.DigestJson;
+import com.jayfeng.androiddigest.webservices.json.DigestListJson;
 import com.jayfeng.lesscode.core.AdapterLess;
 import com.jayfeng.lesscode.core.ViewLess;
 import com.octo.android.robospice.SpiceManager;
@@ -44,7 +44,7 @@ public class HomeFragment extends Fragment implements OnScrollListener {
     private SpiceManager spiceManager = new SpiceManager(HttpClientSpiceService.class);
 
     private ListView listView;
-    private List<JokeDetailJson> listData;
+    private List<DigestJson> listData;
     private BaseAdapter adapter;
 
     private PtrClassicFrameLayout ptrFrame;
@@ -106,19 +106,19 @@ public class HomeFragment extends Fragment implements OnScrollListener {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                JokeDetailJson jokeDetailJson = listData.get(position);
-                String type = jokeDetailJson.getType();
+                DigestJson digestJson = listData.get(position);
+                String type = digestJson.getType();
                 if (Config.JOKE_TYPE_HTML.equals(type)) {
-                    String url = jokeDetailJson.getUrl();
+                    String url = digestJson.getUrl();
                     Intent intent = new Intent(getActivity(), WebViewActivity.class);
 //                    url = "http://www.baidu.com";
                     intent.putExtra(WebViewActivity.KEY_URL, url);
                     startActivity(intent);
                 } else {
                     // default type text
-                    int detailId = jokeDetailJson.getId();
-                    Intent intent = new Intent(getActivity(), JokeDetailActivity.class);
-                    intent.putExtra(JokeDetailActivity.KEY_ID, detailId);
+                    int detailId = digestJson.getId();
+                    Intent intent = new Intent(getActivity(), DigestDetailActivity.class);
+                    intent.putExtra(DigestDetailActivity.KEY_ID, detailId);
                     startActivity(intent);
                 }
             }
@@ -133,10 +133,10 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 
     private void requestNetworkData() {
         JokeListRequest request = new JokeListRequest();
-        request.setUrl(Config.getJokeListUrl(page, size));
+        request.setUrl(Config.getDigestList(page, size));
         spiceManager.getFromCacheAndLoadFromNetworkIfExpired(request,
-                "joke_list_page_" + page + "_size_" + size,
-                DurationInMillis.NEVER, new RequestListener<JokeDetailListJson>() {
+                "digest_list_page_" + page + "_size_" + size,
+                DurationInMillis.NEVER, new RequestListener<DigestListJson>() {
                     @Override
                     public void onRequestFailure(SpiceException spiceException) {
                         ptrFrame.refreshComplete();
@@ -152,8 +152,8 @@ public class HomeFragment extends Fragment implements OnScrollListener {
                     }
 
                     @Override
-                    public void onRequestSuccess(JokeDetailListJson jokeDetailListJson) {
-                        fillAdapterToListView(jokeDetailListJson);
+                    public void onRequestSuccess(DigestListJson digestListJson) {
+                        fillAdapterToListView(digestListJson);
                         errorView.setVisibility(View.GONE);
                         ptrFrame.refreshComplete();
                     }
@@ -161,53 +161,53 @@ public class HomeFragment extends Fragment implements OnScrollListener {
     }
 
     private void showCacheData() {
-        spiceManager.getFromCache(JokeDetailListJson.class,
-                "joke_list_page_" + page + "_size_" + size,
-                DurationInMillis.ALWAYS_RETURNED, new RequestListener<JokeDetailListJson>() {
+        spiceManager.getFromCache(DigestListJson.class,
+                "digest_list_page_" + page + "_size_" + size,
+                DurationInMillis.ALWAYS_RETURNED, new RequestListener<DigestListJson>() {
                     @Override
                     public void onRequestFailure(SpiceException spiceException) {
                     }
 
                     @Override
-                    public void onRequestSuccess(JokeDetailListJson jokeDetailListJson) {
-                        fillAdapterToListView(jokeDetailListJson);
+                    public void onRequestSuccess(DigestListJson digestListJson) {
+                        fillAdapterToListView(digestListJson);
                         resetPage();
                     }
                 });
     }
 
-    private void fillAdapterToListView(JokeDetailListJson jokeDetailListJson) {
-        if (jokeDetailListJson == null) {
+    private void fillAdapterToListView(DigestListJson digestListJson) {
+        if (digestListJson == null) {
             return;
         }
-        listData = jokeDetailListJson;
+        listData = digestListJson;
         adapter = AdapterLess.$base(getActivity(),
                 listData,
                 R.layout.fragment_home_list_item,
-                new AdapterLess.CallBack<JokeDetailJson>() {
+                new AdapterLess.CallBack<DigestJson>() {
                     @Override
-                    public View getView(int i, View view, AdapterLess.ViewHolder viewHolder, JokeDetailJson jokeDetailJson) {
+                    public View getView(int i, View view, AdapterLess.ViewHolder viewHolder, DigestJson digestJson) {
                         TextView titleView = viewHolder.$view(view, R.id.title);
-                        TextView contentView = viewHolder.$view(view, R.id.content);
+                        TextView abstractView = viewHolder.$view(view, R.id.abstracts);
                         ImageView moreView = viewHolder.$view(view, R.id.more);
 
-                        if (TextUtils.isEmpty(jokeDetailJson.getTitle())) {
+                        if (TextUtils.isEmpty(digestJson.getTitle())) {
                             titleView.setVisibility(View.GONE);
                         } else {
-                            titleView.setText(jokeDetailJson.getTitle());
+                            titleView.setText(digestJson.getTitle());
                             TextPaint titlePaint = titleView.getPaint();
                             titlePaint.setFakeBoldText(true);
                             titleView.setVisibility(View.VISIBLE);
                         }
 
-                        if (TextUtils.isEmpty(jokeDetailJson.getContent())) {
-                            contentView.setVisibility(View.GONE);
+                        if (TextUtils.isEmpty(digestJson.getAbstractStr())) {
+                            abstractView.setVisibility(View.GONE);
                         } else {
-                            contentView.setText(jokeDetailJson.getContent());
-                            contentView.setVisibility(View.VISIBLE);
+                            abstractView.setText(digestJson.getAbstractStr());
+                            abstractView.setVisibility(View.VISIBLE);
                         }
 
-                        moreView.setVisibility(jokeDetailJson.isMore() ? View.VISIBLE : View.GONE);
+                        moreView.setVisibility(digestJson.getMore() > 0 ? View.VISIBLE : View.GONE);
                         return view;
                     }
                 });
@@ -223,27 +223,27 @@ public class HomeFragment extends Fragment implements OnScrollListener {
     private void moreNetworkData() {
         int nextPage = page + 1;
         JokeListRequest request = new JokeListRequest();
-        request.setUrl(Config.getJokeListUrl(nextPage, size));
+        request.setUrl(Config.getDigestList(nextPage, size));
         spiceManager.getFromCacheAndLoadFromNetworkIfExpired(request,
-                "joke_list_page_" + nextPage + "_size_" + size,
-                DurationInMillis.NEVER, new RequestListener<JokeDetailListJson>() {
+                "digest_list_page_" + nextPage + "_size_" + size,
+                DurationInMillis.NEVER, new RequestListener<DigestListJson>() {
                     @Override
                     public void onRequestFailure(SpiceException spiceException) {
                     }
 
                     @Override
-                    public void onRequestSuccess(JokeDetailListJson jokeDetailListJson) {
-                        moreAdapterToListView(jokeDetailListJson);
+                    public void onRequestSuccess(DigestListJson digestListJson) {
+                        moreAdapterToListView(digestListJson);
                     }
                 });
     }
 
-    private void moreAdapterToListView(JokeDetailListJson jokeDetailListJson) {
-        if (jokeDetailListJson == null) {
+    private void moreAdapterToListView(DigestListJson digestListJson) {
+        if (digestListJson == null) {
             return;
         }
-        listData.addAll(jokeDetailListJson);
-        if (jokeDetailListJson.size() < Config.PAGE_SIZE) {
+        listData.addAll(digestListJson);
+        if (digestListJson.size() < Config.PAGE_SIZE) {
             if (listView.getFooterViewsCount() > 0) {
                 listView.removeFooterView(footerView);
             }

@@ -2,16 +2,16 @@ package com.jayfeng.androiddigest.webservices.json;
 
 import com.google.api.client.util.Key;
 
-public class JokeDetailJson {
+public class DigestJson {
 
     @Key
     private int id;
     @Key
     private String title;
+    @Key("abstract")
+    private String abstractStr;
     @Key
     private String content;
-    @Key
-    private String body;
     @Key
     private int more;
     @Key
@@ -35,6 +35,14 @@ public class JokeDetailJson {
         this.title = title;
     }
 
+    public String getAbstractStr() {
+        return abstractStr;
+    }
+
+    public void setAbstractStr(String abstractStr) {
+        this.abstractStr = abstractStr;
+    }
+
     public String getContent() {
         return content;
     }
@@ -43,24 +51,12 @@ public class JokeDetailJson {
         this.content = content;
     }
 
-    public String getBody() {
-        return body;
-    }
-
-    public void setBody(String body) {
-        this.body = body;
-    }
-
     public int getMore() {
         return more;
     }
 
     public void setMore(int more) {
         this.more = more;
-    }
-
-    public boolean isMore() {
-        return more > 0;
     }
 
     public String getUrl() {

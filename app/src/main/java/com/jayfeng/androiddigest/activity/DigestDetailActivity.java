@@ -9,14 +9,14 @@ import com.jayfeng.androiddigest.R;
 import com.jayfeng.androiddigest.config.Config;
 import com.jayfeng.androiddigest.service.HttpClientSpiceService;
 import com.jayfeng.androiddigest.webservices.JokeDetailRequest;
-import com.jayfeng.androiddigest.webservices.json.JokeDetailJson;
+import com.jayfeng.androiddigest.webservices.json.DigestJson;
 import com.jayfeng.lesscode.core.ViewLess;
 import com.octo.android.robospice.SpiceManager;
 import com.octo.android.robospice.persistence.DurationInMillis;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
-public class JokeDetailActivity extends ActionBarActivity {
+public class DigestDetailActivity extends ActionBarActivity {
 
     private SpiceManager spiceManager = new SpiceManager(HttpClientSpiceService.class);
 
@@ -46,17 +46,17 @@ public class JokeDetailActivity extends ActionBarActivity {
 
     private void requestNetworkData() {
         JokeDetailRequest request = new JokeDetailRequest();
-        request.setUrl(Config.getJokeDetailUrl(id));
+        request.setUrl(Config.getDigestDetailUrl(id));
         spiceManager.getFromCacheAndLoadFromNetworkIfExpired(request,
                 "joke_detail_id_" + id,
-                DurationInMillis.NEVER, new RequestListener<JokeDetailJson>() {
+                DurationInMillis.NEVER, new RequestListener<DigestJson>() {
                     @Override
                     public void onRequestFailure(SpiceException spiceException) {
                     }
 
                     @Override
-                    public void onRequestSuccess(JokeDetailJson jokeDetailJson) {
-                        bodyView.setText(jokeDetailJson.getBody());
+                    public void onRequestSuccess(DigestJson digestJson) {
+                        bodyView.setText(digestJson.getContent());
                     }
                 });
     }

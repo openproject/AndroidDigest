@@ -6,15 +6,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 
+import com.jayfeng.androiddigest.R;
+import com.jayfeng.androiddigest.fragment.HomeFragment;
+import com.jayfeng.androiddigest.fragment.OfflineFragment;
 import com.jayfeng.lesscode.core.ViewLess;
-import com.yy317.joke.R;
-import com.yy317.joke.fragment.HomeFragment;
-import com.yy317.joke.fragment.OfflineFragment;
 
 
 public class MainActivity extends ActionBarActivity implements RadioButton.OnCheckedChangeListener {
@@ -23,8 +21,8 @@ public class MainActivity extends ActionBarActivity implements RadioButton.OnChe
     private FragmentManager fragmentManager;
 
     private RadioButton homeTabBtn;
-    private RadioButton weixinTabBtn;
-    private RadioButton offlineTabBtn;
+    private RadioButton blogTabBtn;
+    private RadioButton toolTabBtn;
 
     private Fragment currentFragment;
     private Fragment homeFragment;
@@ -47,12 +45,12 @@ public class MainActivity extends ActionBarActivity implements RadioButton.OnChe
 
     private void init() {
         homeTabBtn = ViewLess.$(this, R.id.tab_home_btn);
-        weixinTabBtn = ViewLess.$(this, R.id.tab_weixin_btn);
-        offlineTabBtn = ViewLess.$(this, R.id.tab_offline_btn);
+        blogTabBtn = ViewLess.$(this, R.id.tab_blog_btn);
+        toolTabBtn = ViewLess.$(this, R.id.tab_tool_btn);
 
         homeTabBtn.setOnCheckedChangeListener(this);
-        weixinTabBtn.setOnCheckedChangeListener(this);
-        offlineTabBtn.setOnCheckedChangeListener(this);
+        blogTabBtn.setOnCheckedChangeListener(this);
+        toolTabBtn.setOnCheckedChangeListener(this);
 
         currentFragment = homeFragment = new HomeFragment();
         offlineFragment = new OfflineFragment();
@@ -88,10 +86,10 @@ public class MainActivity extends ActionBarActivity implements RadioButton.OnChe
                 case R.id.tab_home_btn:
                     changeFrament(homeFragment);
                     break;
-                case R.id.tab_weixin_btn:
+                case R.id.tab_blog_btn:
                     changeFrament(offlineFragment);
                     break;
-                case R.id.tab_offline_btn:
+                case R.id.tab_tool_btn:
                     changeFrament(offlineFragment);
                     break;
                 default:
@@ -100,25 +98,4 @@ public class MainActivity extends ActionBarActivity implements RadioButton.OnChe
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

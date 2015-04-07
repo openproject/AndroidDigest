@@ -25,15 +25,15 @@ public class Config {
 
     public static String sDomain = "http://www.yy317.com/";
 
-    public static String getJokeListUrl(int page, int size) {
-        return sDomain + "joke/list.php?page=" + page + "&size=" + size;
+    public static String getDigestList(int page, int size) {
+        return sDomain + "android/list.php?page=" + page + "&size=" + size;
     }
 
-    public static String getJokeDetailUrl(int id) {
-        return sDomain + "joke/detail.php?id=" + id;
+    public static String getDigestDetailUrl(int id) {
+        return sDomain + "android/detail.php?id=" + id;
     }
 
     public static String getOfflineListUrl() {
-        return sDomain + "joke/offline/list.json";
+        return sDomain + "android/offline/list.json";
     }
 }

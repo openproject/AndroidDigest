@@ -9,8 +9,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.jayfeng.androiddigest.R;
 import com.jayfeng.lesscode.core.ViewLess;
-import com.yy317.joke.R;
 
 public class WebViewActivity extends ActionBarActivity {
 

@@ -5,7 +5,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 
-import com.yy317.joke.R;
+import com.jayfeng.androiddigest.R;
 
 public class OfflineActivity extends ActionBarActivity {
 

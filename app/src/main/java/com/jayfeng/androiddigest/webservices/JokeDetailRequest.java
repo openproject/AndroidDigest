@@ -5,22 +5,22 @@ import com.google.api.client.http.HttpContent;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.UrlEncodedContent;
 import com.google.api.client.json.jackson2.JacksonFactory;
-import com.jayfeng.androiddigest.webservices.json.JokeDetailJson;
+import com.jayfeng.androiddigest.webservices.json.DigestJson;
 
 import java.util.HashMap;
 
-public class JokeDetailRequest extends BaseGoogleHttpClientSpiceRequest<JokeDetailJson> {
+public class JokeDetailRequest extends BaseGoogleHttpClientSpiceRequest<DigestJson> {
 
     String url = null;
 
     HashMap<String, String > postParameters;
 
     public JokeDetailRequest() {
-        super(JokeDetailJson.class);
+        super(DigestJson.class);
     }
 
     @Override
-    public JokeDetailJson loadDataFromNetwork() throws Exception {
+    public DigestJson loadDataFromNetwork() throws Exception {
 
         HttpRequest request = null;
         GenericUrl genericUrl = new GenericUrl(url);
