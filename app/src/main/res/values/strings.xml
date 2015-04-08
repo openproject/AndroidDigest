@@ -7,6 +7,8 @@
     <string name="tab_home_text">最新</string>
     <string name="tab_blog_text">站点/博客</string>
     <string name="tab_tool_text">工具箱</string>
+    <string name="tab_more_text">更多</string>
+    <string name="tab_more_menu_setting">设置</string>
     <string name="title_activity_joke_detail">正文</string>
     <string name="title_activity_web_view">正文</string>
     <string name="title_activity_offline">离线列表</string>

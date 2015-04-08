@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/more_menu_joke"
+        android:title="笑笑更健康"/>
+
+    <item
+        android:id="@+id/more_menu_setting"
+        android:title="@string/tab_more_menu_setting"/>
+
+</menu>

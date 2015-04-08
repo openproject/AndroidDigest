@@ -20,6 +20,7 @@
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
         android:layout_width="fill_parent"
+        android:background="#fff"
         android:layout_height="?attr/actionBarSize">
 
         <RadioButton
@@ -36,6 +37,12 @@
         <RadioButton
             android:id="@+id/tab_tool_btn"
             android:text="@string/tab_tool_text"
+            style="@style/TabItemStyle" />
+
+        <Button
+            android:id="@+id/tab_more_btn"
+            android:text="@string/tab_more_text"
+            android:background="#00000000"
             style="@style/TabItemStyle" />
 
     </RadioGroup>
