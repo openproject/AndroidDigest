@@ -14,6 +14,8 @@ public class Config {
     public static final String JOKE_TYPE_TEXT = "text";
     public static final String JOKE_TYPE_HTML = "html";
 
+
+    public static final String BLOG_TYPE_HEADER = "header";
     public static final String BLOG_TYPE_DIR = "dir";
     public static final String BLOG_TYPE_HTML = "html";
 

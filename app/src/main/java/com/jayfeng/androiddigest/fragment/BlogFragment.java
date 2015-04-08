@@ -173,8 +173,8 @@ public class BlogFragment extends Fragment {
         listData = offlineListJson;
         adapter = AdapterLess.$base(getActivity(),
                 listData,
-                R.layout.fragment_blog_list_item,
-                new AdapterLess.CallBack<OfflineJson>() {
+                new int[] { R.layout.fragment_blog_list_item, R.layout.fragment_blog_list_item_header},
+                new AdapterLess.FullCallBack<OfflineJson>() {
                     @Override
                     public View getView(int i, View view, AdapterLess.ViewHolder viewHolder, OfflineJson offlineJson) {
                         ImageView iconView = viewHolder.$view(view, R.id.icon);
@@ -182,11 +182,30 @@ public class BlogFragment extends Fragment {
 
                         if (Config.BLOG_TYPE_DIR.equals(offlineJson.getType())) {
                             iconView.setImageResource(R.mipmap.offline_type_folder);
-                        } else {
+                        } else if (Config.BLOG_TYPE_HTML.equals(offlineJson.getType())){
                             iconView.setImageResource(R.mipmap.offline_type_file);
                         }
                         titleView.setText(offlineJson.getTitle());
                         return view;
+                    }
+
+                    @Override
+                    public int getItemViewType(int i) {
+                        OfflineJson offlineJson = listData.get(i);
+                        if (Config.BLOG_TYPE_HEADER.equals(offlineJson.getType())) {
+                            return 1;
+                        } else {
+                            return 0;
+                        }
+                    }
+
+                    @Override
+                    public boolean isEnabled(int i) {
+                        OfflineJson offlineJson = listData.get(i);
+                        if (Config.BLOG_TYPE_HEADER.equals(offlineJson.getType())) {
+                            return false;
+                        }
+                        return true;
                     }
                 });
         listView.setAdapter(adapter);

@@ -26,7 +26,7 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.0.0'
-    compile 'com.jayfeng.lesscode:lesscode-core:0.1.5'
+    compile 'com.jayfeng.lesscode:lesscode-core:0.1.7'
     compile 'in.srain.cube:ultra-ptr:1.0.8'
     compile('com.octo.android.robospice:robospice-google-http-client:1.4.14') {
         exclude(group: 'org.apache.httpcomponents', module: 'httpclient') //by both name and group
