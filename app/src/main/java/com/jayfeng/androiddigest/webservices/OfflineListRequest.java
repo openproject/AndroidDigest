@@ -7,13 +7,9 @@ import com.google.api.client.http.UrlEncodedContent;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.jayfeng.androiddigest.webservices.json.OfflineListJson;
 
-import java.util.HashMap;
-
 public class OfflineListRequest extends BaseGoogleHttpClientSpiceRequest<OfflineListJson> {
 
     String url = null;
-
-    HashMap<String, String > postParameters;
 
     public OfflineListRequest() {
         super(OfflineListJson.class);
@@ -38,9 +34,5 @@ public class OfflineListRequest extends BaseGoogleHttpClientSpiceRequest<Offline
 
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    public void setPostParameters(HashMap<String, String> postParameters) {
-        this.postParameters = postParameters;
     }
 }

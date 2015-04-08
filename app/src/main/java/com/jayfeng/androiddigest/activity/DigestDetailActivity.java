@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.jayfeng.androiddigest.R;
 import com.jayfeng.androiddigest.config.Config;
 import com.jayfeng.androiddigest.service.HttpClientSpiceService;
-import com.jayfeng.androiddigest.webservices.JokeDetailRequest;
+import com.jayfeng.androiddigest.webservices.DigestRequest;
 import com.jayfeng.androiddigest.webservices.json.DigestJson;
 import com.jayfeng.lesscode.core.ViewLess;
 import com.octo.android.robospice.SpiceManager;
@@ -45,7 +45,7 @@ public class DigestDetailActivity extends ActionBarActivity {
     }
 
     private void requestNetworkData() {
-        JokeDetailRequest request = new JokeDetailRequest();
+        DigestRequest request = new DigestRequest();
         request.setUrl(Config.getDigestDetailUrl(id));
         spiceManager.getFromCacheAndLoadFromNetworkIfExpired(request,
                 "joke_detail_id_" + id,

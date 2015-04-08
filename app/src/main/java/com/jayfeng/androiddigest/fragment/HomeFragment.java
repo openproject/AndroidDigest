@@ -23,7 +23,7 @@ import com.jayfeng.androiddigest.activity.DigestDetailActivity;
 import com.jayfeng.androiddigest.activity.WebViewActivity;
 import com.jayfeng.androiddigest.config.Config;
 import com.jayfeng.androiddigest.service.HttpClientSpiceService;
-import com.jayfeng.androiddigest.webservices.JokeListRequest;
+import com.jayfeng.androiddigest.webservices.DigestListRequest;
 import com.jayfeng.androiddigest.webservices.json.DigestJson;
 import com.jayfeng.androiddigest.webservices.json.DigestListJson;
 import com.jayfeng.lesscode.core.AdapterLess;
@@ -132,7 +132,7 @@ public class HomeFragment extends Fragment implements OnScrollListener {
      */
 
     private void requestNetworkData() {
-        JokeListRequest request = new JokeListRequest();
+        DigestListRequest request = new DigestListRequest();
         request.setUrl(Config.getDigestList(page, size));
         spiceManager.getFromCacheAndLoadFromNetworkIfExpired(request,
                 "digest_list_page_" + page + "_size_" + size,
@@ -222,7 +222,7 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 
     private void moreNetworkData() {
         int nextPage = page + 1;
-        JokeListRequest request = new JokeListRequest();
+        DigestListRequest request = new DigestListRequest();
         request.setUrl(Config.getDigestList(nextPage, size));
         spiceManager.getFromCacheAndLoadFromNetworkIfExpired(request,
                 "digest_list_page_" + nextPage + "_size_" + size,

@@ -6,8 +6,11 @@ import com.google.api.client.http.HttpRequest;
 import com.octo.android.robospice.request.googlehttpclient.GoogleHttpClientSpiceRequest;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 public abstract class BaseGoogleHttpClientSpiceRequest<RESULT> extends GoogleHttpClientSpiceRequest<RESULT> {
+
+    HashMap<String, String > postParameters;
 
     protected BaseGoogleHttpClientSpiceRequest(Class<RESULT> clazz) {
         super(clazz);
@@ -29,5 +32,9 @@ public abstract class BaseGoogleHttpClientSpiceRequest<RESULT> extends GoogleHtt
         request.getHeaders().set("Connection", "close");
         request.getHeaders().setAccept("text/html,application/xhtml+xml,application/xml,application/json");
         return request;
+    }
+
+    public void setPostParameters(HashMap<String, String> postParameters) {
+        this.postParameters = postParameters;
     }
 }
