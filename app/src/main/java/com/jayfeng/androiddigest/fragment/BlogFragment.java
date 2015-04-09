@@ -183,7 +183,7 @@ public class BlogFragment extends Fragment {
                         if (Config.BLOG_TYPE_DIR.equals(offlineJson.getType())) {
                             iconView.setImageResource(R.mipmap.offline_type_folder);
                         } else if (Config.BLOG_TYPE_HTML.equals(offlineJson.getType())){
-                            iconView.setImageResource(R.mipmap.offline_type_file);
+                            iconView.setImageResource(R.mipmap.blog_type_html);
                         }
                         titleView.setText(offlineJson.getTitle());
                         return view;
