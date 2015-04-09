@@ -12,4 +12,12 @@
     <string name="title_activity_joke_detail">正文</string>
     <string name="title_activity_web_view">正文</string>
     <string name="title_activity_offline">离线列表</string>
+    <string name="title_activity_tool_list">工具箱列表</string>
+
+    <string name="tool_category_compoment_title">控件</string>
+    <string name="tool_category_compoment_description">您可以在这里找到各种你要的效果的组件</string>
+    <string name="tool_category_library_title">类库</string>
+    <string name="tool_category_library_description">提高开发效率，解决某些问题的一些框架等</string>
+    <string name="tool_category_tool_title">工具</string>
+    <string name="tool_category_tool_description">开发、设计、测试相关的辅助性工具</string>
 </resources>

@@ -14,7 +14,6 @@ public class WebViewActivity extends BaseActivity {
 
     public static final String KEY_URL = "url";
 
-
     private WebView webView;
     private String url;
 

@@ -1,15 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.jayfeng.androiddigest">
+    package="com.jayfeng.androiddigest" >
 
-    <application android:name=".MyApp"
+    <application
+        android:name=".MyApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,13 +25,17 @@
 
         <activity
             android:name=".activity.DigestDetailActivity"
-            android:label="@string/title_activity_joke_detail"></activity>
+            android:label="@string/title_activity_joke_detail" />
         <activity
             android:name=".activity.WebViewActivity"
-            android:label="@string/title_activity_web_view"></activity>
+            android:label="@string/title_activity_web_view" />
         <activity
             android:name=".activity.OfflineActivity"
-            android:label="@string/title_activity_offline"></activity>
+            android:label="@string/title_activity_offline" />
+        <activity
+            android:name=".activity.ToolListActivity"
+            android:label="@string/title_activity_tool_list" >
+        </activity>
     </application>
 
 </manifest>

@@ -15,6 +15,7 @@ import com.jayfeng.androiddigest.R;
 import com.jayfeng.androiddigest.fragment.BlogFragment;
 import com.jayfeng.androiddigest.fragment.HomeFragment;
 import com.jayfeng.androiddigest.fragment.OfflineFragment;
+import com.jayfeng.androiddigest.fragment.ToolFragment;
 import com.jayfeng.lesscode.core.ViewLess;
 
 
@@ -31,7 +32,7 @@ public class MainActivity extends BaseActivity
     private Fragment currentFragment;
     private Fragment homeFragment;
     private Fragment blogFragment;
-    private Fragment offlineFragment;
+    private Fragment toolFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +59,7 @@ public class MainActivity extends BaseActivity
 
         currentFragment = homeFragment = new HomeFragment();
         blogFragment = new BlogFragment();
-        offlineFragment = new OfflineFragment();
+        toolFragment = new ToolFragment();
 
         initFragment();
     }
@@ -95,7 +96,7 @@ public class MainActivity extends BaseActivity
                     changeFrament(blogFragment);
                     break;
                 case R.id.tab_tool_btn:
-                    changeFrament(offlineFragment);
+                    changeFrament(toolFragment);
                     break;
                 default:
                     break;
