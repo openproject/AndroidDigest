@@ -4,9 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.PopupMenu;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -20,10 +18,9 @@ import com.jayfeng.androiddigest.fragment.OfflineFragment;
 import com.jayfeng.lesscode.core.ViewLess;
 
 
-public class MainActivity extends ActionBarActivity
+public class MainActivity extends BaseActivity
         implements RadioButton.OnCheckedChangeListener, View.OnClickListener {
 
-    private Toolbar toolbar;
     private FragmentManager fragmentManager;
 
     private RadioButton homeTabBtn;
@@ -41,10 +38,7 @@ public class MainActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
-        toolbar.showOverflowMenu();
-        setSupportActionBar(toolbar);
+        showToolbar();
 
         fragmentManager = getSupportFragmentManager();
 
@@ -131,4 +125,8 @@ public class MainActivity extends ActionBarActivity
         popup.show();
     }
 
+    @Override
+    protected boolean showNavigationIcon() {
+        return false;
+    }
 }

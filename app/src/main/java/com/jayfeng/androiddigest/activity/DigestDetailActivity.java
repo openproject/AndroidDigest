@@ -1,8 +1,6 @@
 package com.jayfeng.androiddigest.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import com.jayfeng.androiddigest.R;
@@ -16,14 +14,12 @@ import com.octo.android.robospice.persistence.DurationInMillis;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
-public class DigestDetailActivity extends ActionBarActivity {
+public class DigestDetailActivity extends BaseActivity {
 
     private SpiceManager spiceManager = new SpiceManager(HttpClientSpiceService.class);
 
     public static final String KEY_ID = "id";
     private int id = 0;
-
-    private Toolbar toolbar;
 
     private TextView bodyView;
 
@@ -32,12 +28,9 @@ public class DigestDetailActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_joke_detail);
 
-        id = getIntent().getIntExtra(KEY_ID, 0);
+        showToolbar();
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
-        toolbar.showOverflowMenu();
-        setSupportActionBar(toolbar);
+        id = getIntent().getIntExtra(KEY_ID, 0);
 
         bodyView = ViewLess.$(this, R.id.body);
 
