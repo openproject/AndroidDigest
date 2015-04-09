@@ -2,6 +2,7 @@ package com.jayfeng.androiddigest.fragment;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jayfeng.androiddigest.R;
 import com.jayfeng.androiddigest.activity.DigestDetailActivity;
 import com.jayfeng.androiddigest.activity.WebViewActivity;
@@ -189,6 +191,7 @@ public class HomeFragment extends Fragment implements OnScrollListener {
                     public View getView(int i, View view, AdapterLess.ViewHolder viewHolder, DigestJson digestJson) {
                         TextView titleView = viewHolder.$view(view, R.id.title);
                         TextView abstractView = viewHolder.$view(view, R.id.abstracts);
+                        SimpleDraweeView draweeView = viewHolder.$view(view,R.id.thumbnail);
                         ImageView moreView = viewHolder.$view(view, R.id.more);
 
                         if (TextUtils.isEmpty(digestJson.getTitle())) {
@@ -205,6 +208,14 @@ public class HomeFragment extends Fragment implements OnScrollListener {
                         } else {
                             abstractView.setText(digestJson.getAbstractStr());
                             abstractView.setVisibility(View.VISIBLE);
+                        }
+
+                        if (!TextUtils.isEmpty(digestJson.getThumbnail())) {
+                            Uri uri = Uri.parse(digestJson.getThumbnail());
+                            draweeView.setImageURI(uri);
+                            draweeView.setVisibility(View.VISIBLE);
+                        } else {
+                            draweeView.setVisibility(View.GONE);
                         }
 
                         moreView.setVisibility(digestJson.getMore() > 0 ? View.VISIBLE : View.GONE);

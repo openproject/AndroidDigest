@@ -37,4 +37,5 @@ dependencies {
         exclude(group: 'junit', module: 'junit') //by both name and group
         exclude(group: 'com.google.android', module: 'android') //by both name and group
     }
+    compile 'com.facebook.fresco:fresco:0.2.0'
 }

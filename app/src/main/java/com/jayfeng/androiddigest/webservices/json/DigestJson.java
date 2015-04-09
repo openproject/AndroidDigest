@@ -13,6 +13,8 @@ public class DigestJson {
     @Key
     private String content;
     @Key
+    private String thumbnail;
+    @Key
     private int more;
     @Key
     private String url;
@@ -49,6 +51,14 @@ public class DigestJson {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
     }
 
     public int getMore() {
