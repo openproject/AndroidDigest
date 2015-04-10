@@ -5,6 +5,10 @@
         android:title="笑笑更健康"/>
 
     <item
+        android:id="@+id/more_menu_post"
+        android:title="反馈"/>
+
+    <item
         android:id="@+id/more_menu_setting"
         android:title="@string/tab_more_menu_setting"/>
 

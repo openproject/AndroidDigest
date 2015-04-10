@@ -17,6 +17,7 @@ import com.jayfeng.androiddigest.fragment.HomeFragment;
 import com.jayfeng.androiddigest.fragment.OfflineFragment;
 import com.jayfeng.androiddigest.fragment.ToolFragment;
 import com.jayfeng.lesscode.core.ViewLess;
+import com.umeng.fb.FeedbackAgent;
 
 
 public class MainActivity extends BaseActivity
@@ -34,6 +35,8 @@ public class MainActivity extends BaseActivity
     private Fragment blogFragment;
     private Fragment toolFragment;
 
+    FeedbackAgent agent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +50,10 @@ public class MainActivity extends BaseActivity
         fragmentManager = getSupportFragmentManager();
 
         init();
+
+        // receive the feedback notification
+        agent = new FeedbackAgent(this);
+        agent.sync();
     }
 
     private void init() {
@@ -123,6 +130,9 @@ public class MainActivity extends BaseActivity
         popup.getMenuInflater().inflate(R.menu.more_popup_menu, popup.getMenu());
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
+                if (item.getItemId() == R.id.more_menu_post) {
+                    agent.startFeedbackActivity();
+                }
                 return true;
             }
         });

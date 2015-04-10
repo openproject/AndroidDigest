@@ -15,3 +15,10 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+-keepclassmembers class * {
+    public <init>(org.json.JSONObject);
+}
+
+-keep public class com.jayfeng.androiddigest.R$*{
+    public static final int *;
+}
