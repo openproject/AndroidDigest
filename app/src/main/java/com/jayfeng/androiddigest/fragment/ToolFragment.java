@@ -75,8 +75,9 @@ public class ToolFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String key = listData.get(position).getKey();
-                    Intent intent = new Intent(getActivity(), ToolListActivity.class);
-                    startActivity(intent);
+                Intent intent = new Intent(getActivity(), ToolListActivity.class);
+                intent.putExtra(ToolListActivity.KEY_TYPE, key);
+                startActivity(intent);
             }
         });
     }

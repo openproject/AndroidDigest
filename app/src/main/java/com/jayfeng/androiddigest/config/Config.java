@@ -48,8 +48,8 @@ public class Config {
         return sDomain + "android/blog/list.json";
     }
 
-    public static String getToolListUrl() {
-        return sDomain + "android/tool/list.php";
+    public static String getToolListUrl(String type) {
+        return sDomain + "android/tool/list.php?type=" + type;
     }
 
     public static String getOfflineListUrl() {

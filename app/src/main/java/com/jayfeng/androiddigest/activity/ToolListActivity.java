@@ -29,6 +29,8 @@ import in.srain.cube.views.ptr.PtrFrameLayout;
 
 public class ToolListActivity extends BaseActivity {
 
+    public static final String KEY_TYPE = "type";
+
     private SpiceManager spiceManager = new SpiceManager(HttpClientSpiceService.class);
 
     private ListView listView;
@@ -38,12 +40,16 @@ public class ToolListActivity extends BaseActivity {
     private PtrClassicFrameLayout ptrFrame;
     private View errorView;
 
+    private String type;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tool_list);
 
         showToolbar();
+
+        type = getIntent().getStringExtra(KEY_TYPE);
 
         listView = ViewLess.$(this, R.id.listview);
         errorView = ViewLess.$(this, R.id.error);
@@ -163,7 +169,7 @@ public class ToolListActivity extends BaseActivity {
     }
 
     private String getListUrl() {
-        return Config.getToolListUrl();
+        return Config.getToolListUrl(type);
     }
 
     private String getCacheKey() {
