@@ -19,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.jayfeng.androiddigest.R;
 import com.jayfeng.androiddigest.activity.DigestDetailActivity;
@@ -29,6 +31,7 @@ import com.jayfeng.androiddigest.webservices.DigestListRequest;
 import com.jayfeng.androiddigest.webservices.json.DigestJson;
 import com.jayfeng.androiddigest.webservices.json.DigestListJson;
 import com.jayfeng.lesscode.core.AdapterLess;
+import com.jayfeng.lesscode.core.LogLess;
 import com.jayfeng.lesscode.core.ViewLess;
 import com.octo.android.robospice.SpiceManager;
 import com.octo.android.robospice.persistence.DurationInMillis;
@@ -212,7 +215,11 @@ public class HomeFragment extends Fragment implements OnScrollListener {
 
                         if (!TextUtils.isEmpty(digestJson.getThumbnail())) {
                             Uri uri = Uri.parse(digestJson.getThumbnail());
-                            draweeView.setImageURI(uri);
+                            DraweeController controller = Fresco.newDraweeControllerBuilder()
+                                    .setUri(uri)
+                                    .setAutoPlayAnimations(true)
+                                    .build();
+                            draweeView.setController(controller);
                             draweeView.setVisibility(View.VISIBLE);
                         } else {
                             draweeView.setVisibility(View.GONE);

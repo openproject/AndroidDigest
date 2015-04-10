@@ -3,6 +3,7 @@ package com.jayfeng.androiddigest;
 import android.app.Application;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.jayfeng.lesscode.core.$;
 
 public class MyApp extends Application {
 
@@ -11,5 +12,10 @@ public class MyApp extends Application {
         super.onCreate();
 
         Fresco.initialize(this);
+
+        $.getInstance()
+                .context(getApplicationContext())
+                .log(BuildConfig.DEBUG, "DIGEST")
+                .build();
     }
 }
