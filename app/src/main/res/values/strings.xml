@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Android干柴</string>
+    <string name="app_name">干柴</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -15,11 +15,13 @@
     <string name="title_activity_tool_list">工具箱列表</string>
 
     <string name="tool_category_compoment_title">控件</string>
-    <string name="tool_category_compoment_description">您可以在这里找到各种你要的效果的组件</string>
+    <string name="tool_category_compoment_description">绚丽效果、功能强大的组件大全</string>
     <string name="tool_category_library_title">类库</string>
     <string name="tool_category_library_description">提高开发效率，解决某些问题的一些框架等</string>
     <string name="tool_category_tool_title">工具</string>
     <string name="tool_category_tool_description">开发、设计、测试相关的辅助性工具</string>
     <string name="tool_category_code_title">代码</string>
     <string name="tool_category_code_description">实用片段、奇技淫巧</string>
+    <string name="tool_category_project_title">项目</string>
+    <string name="tool_category_project_description">完整的开源Android项目</string>
 </resources>
