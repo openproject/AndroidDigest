@@ -120,5 +120,11 @@ public class ToolFragment extends Fragment {
         toolCategory.setTitle(getString(R.string.tool_category_tool_title));
         toolCategory.setDescription(getString(R.string.tool_category_tool_description));
         listData.add(toolCategory);
+
+        toolCategory = new ToolCategory();
+        toolCategory.setKey(Config.TOOL_CATEGORY_CODE);
+        toolCategory.setTitle(getString(R.string.tool_category_code_title));
+        toolCategory.setDescription(getString(R.string.tool_category_code_description));
+        listData.add(toolCategory);
     }
 }

@@ -20,4 +20,6 @@
     <string name="tool_category_library_description">提高开发效率，解决某些问题的一些框架等</string>
     <string name="tool_category_tool_title">工具</string>
     <string name="tool_category_tool_description">开发、设计、测试相关的辅助性工具</string>
+    <string name="tool_category_code_title">代码</string>
+    <string name="tool_category_code_description">实用片段、奇技淫巧</string>
 </resources>

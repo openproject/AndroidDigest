@@ -25,6 +25,7 @@ public class Config {
     public static final String TOOL_CATEGORY_COMPOMENT = "compoment";
     public static final String TOOL_CATEGORY_LIBRARY = "library";
     public static final String TOOL_CATEGORY_TOOL = "tool";
+    public static final String TOOL_CATEGORY_CODE = "code";
 
     /*
      * ========================================================================
