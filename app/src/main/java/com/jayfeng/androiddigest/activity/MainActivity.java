@@ -40,6 +40,9 @@ public class MainActivity extends BaseActivity
         setContentView(R.layout.activity_main);
 
         showToolbar();
+        toolbar.setNavigationIcon(R.mipmap.ic_launcher);
+        toolbar.setSubtitle(R.string.app_description);
+        toolbar.setSubtitleTextColor(getResources().getColor(android.R.color.white));
 
         fragmentManager = getSupportFragmentManager();
 
