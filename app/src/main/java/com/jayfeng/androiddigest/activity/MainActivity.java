@@ -25,6 +25,10 @@ public class MainActivity extends BaseActivity
 
     private FragmentManager fragmentManager;
 
+    private static final String TAG_HOME = "home";
+    private static final String TAG_BLOG = "blog";
+    private static final String TAG_TOOL = "tool";
+
     private RadioButton homeTabBtn;
     private RadioButton blogTabBtn;
     private RadioButton toolTabBtn;
@@ -76,7 +80,7 @@ public class MainActivity extends BaseActivity
 
     private void initFragment() {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragments, homeFragment).commit();
+        fragmentTransaction.add(R.id.fragments, homeFragment, TAG_HOME).commit();
     }
 
     public void changeFrament(Fragment fragment) {
@@ -87,7 +91,7 @@ public class MainActivity extends BaseActivity
 
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         if (!fragment.isAdded()) {
-            fragmentTransaction.hide(currentFragment).add(R.id.fragments, fragment).commit();
+            fragmentTransaction.hide(currentFragment).add(R.id.fragments, fragment, fragment.getTag()).commit();
         } else {
             fragmentTransaction.hide(currentFragment).show(fragment).commit();
         }
@@ -100,12 +104,21 @@ public class MainActivity extends BaseActivity
         if (isChecked) {
             switch (buttonView.getId()) {
                 case R.id.tab_home_btn:
+                    if (homeFragment == null) {
+                        homeFragment = fragmentManager.findFragmentByTag(TAG_HOME);
+                    }
                     changeFrament(homeFragment);
                     break;
                 case R.id.tab_blog_btn:
+                    if (blogFragment == null) {
+                        blogFragment = fragmentManager.findFragmentByTag(TAG_BLOG);
+                    }
                     changeFrament(blogFragment);
                     break;
                 case R.id.tab_tool_btn:
+                    if (toolFragment == null) {
+                        toolFragment = fragmentManager.findFragmentByTag(TAG_TOOL);
+                    }
                     changeFrament(toolFragment);
                     break;
                 default:
