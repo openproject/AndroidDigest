@@ -252,9 +252,7 @@ public class HomeFragment extends Fragment implements OnScrollListener {
         int nextPage = page + 1;
         DigestListRequest request = new DigestListRequest();
         request.setUrl(Config.getDigestList(nextPage, size));
-        spiceManager.getFromCacheAndLoadFromNetworkIfExpired(request,
-                "digest_list_page_" + nextPage + "_size_" + size,
-                DurationInMillis.NEVER, new RequestListener<DigestListJson>() {
+        spiceManager.execute(request, new RequestListener<DigestListJson>() {
                     @Override
                     public void onRequestFailure(SpiceException spiceException) {
                     }
