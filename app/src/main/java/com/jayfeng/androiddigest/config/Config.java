@@ -53,6 +53,10 @@ public class Config {
         return sDomain + "android/tool/list.php?type=" + type;
     }
 
+    public static String getCheckUpdateUrl() {
+        return sDomain + "android/latest.json";
+    }
+
     public static String getOfflineListUrl() {
         return sDomain + "android/offline/list.json";
     }
