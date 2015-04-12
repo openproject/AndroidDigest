@@ -9,8 +9,6 @@ import com.jayfeng.androiddigest.webservices.json.DigestListJson;
 
 public class DigestListRequest extends BaseGoogleHttpClientSpiceRequest<DigestListJson> {
 
-    String url = null;
-
     public DigestListRequest() {
         super(DigestListJson.class);
     }
@@ -30,9 +28,5 @@ public class DigestListRequest extends BaseGoogleHttpClientSpiceRequest<DigestLi
         request.setParser(new JacksonFactory().createJsonObjectParser());
 
         return request.execute().parseAs(getResultType());
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 }

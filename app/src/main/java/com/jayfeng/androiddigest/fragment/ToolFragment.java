@@ -10,35 +10,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.jayfeng.androiddigest.R;
-import com.jayfeng.androiddigest.activity.OfflineActivity;
 import com.jayfeng.androiddigest.activity.ToolListActivity;
-import com.jayfeng.androiddigest.activity.WebViewActivity;
 import com.jayfeng.androiddigest.config.Config;
 import com.jayfeng.androiddigest.model.ToolCategory;
-import com.jayfeng.androiddigest.service.HttpClientSpiceService;
-import com.jayfeng.androiddigest.webservices.OfflineListRequest;
-import com.jayfeng.androiddigest.webservices.ToolListRequest;
-import com.jayfeng.androiddigest.webservices.json.OfflineJson;
-import com.jayfeng.androiddigest.webservices.json.OfflineListJson;
 import com.jayfeng.lesscode.core.AdapterLess;
-import com.jayfeng.lesscode.core.EncodeLess;
 import com.jayfeng.lesscode.core.ViewLess;
-import com.octo.android.robospice.SpiceManager;
-import com.octo.android.robospice.persistence.DurationInMillis;
-import com.octo.android.robospice.persistence.exception.SpiceException;
-import com.octo.android.robospice.request.listener.RequestListener;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import in.srain.cube.views.ptr.PtrClassicFrameLayout;
-import in.srain.cube.views.ptr.PtrDefaultHandler;
-import in.srain.cube.views.ptr.PtrFrameLayout;
 
 public class ToolFragment extends Fragment {
 

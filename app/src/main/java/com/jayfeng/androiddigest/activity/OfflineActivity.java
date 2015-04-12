@@ -1,7 +1,6 @@
 package com.jayfeng.androiddigest.activity;
 
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 
 import com.jayfeng.androiddigest.R;

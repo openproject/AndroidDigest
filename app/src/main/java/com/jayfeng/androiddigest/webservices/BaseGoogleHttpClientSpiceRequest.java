@@ -10,6 +10,7 @@ import java.util.HashMap;
 
 public abstract class BaseGoogleHttpClientSpiceRequest<RESULT> extends GoogleHttpClientSpiceRequest<RESULT> {
 
+    String url = null;
     HashMap<String, String > postParameters;
 
     protected BaseGoogleHttpClientSpiceRequest(Class<RESULT> clazz) {
@@ -32,6 +33,10 @@ public abstract class BaseGoogleHttpClientSpiceRequest<RESULT> extends GoogleHtt
         request.getHeaders().set("Connection", "close");
         request.getHeaders().setAccept("text/html,application/xhtml+xml,application/xml,application/json");
         return request;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public void setPostParameters(HashMap<String, String> postParameters) {

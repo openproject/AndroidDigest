@@ -15,7 +15,6 @@ import android.widget.RadioButton;
 import com.jayfeng.androiddigest.R;
 import com.jayfeng.androiddigest.fragment.BlogFragment;
 import com.jayfeng.androiddigest.fragment.HomeFragment;
-import com.jayfeng.androiddigest.fragment.OfflineFragment;
 import com.jayfeng.androiddigest.fragment.ToolFragment;
 import com.jayfeng.lesscode.core.ViewLess;
 import com.umeng.fb.FeedbackAgent;

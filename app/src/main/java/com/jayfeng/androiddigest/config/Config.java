@@ -37,7 +37,7 @@ public class Config {
 
     public static String sDomain = "http://www.yy317.com/";
 
-    public static String getDigestList(int page, int size) {
+    public static String getDigestListUrl(int page, int size) {
         return sDomain + "android/digest/list.php?page=" + page + "&size=" + size;
     }
 
@@ -55,6 +55,14 @@ public class Config {
 
     public static String getCheckUpdateUrl() {
         return sDomain + "android/latest.json";
+    }
+
+    public static String getReviewDigestListUrl(int page, int size) {
+        return sDomain + "android/digest/list.php?table=android_digest_review&page=" + page + "&size=" + size;
+    }
+
+    public static String postReviewDigestUrl() {
+        return sDomain + "android/digest/review_post.php";
     }
 
     public static String getOfflineListUrl() {

@@ -9,8 +9,6 @@ import com.jayfeng.androiddigest.webservices.json.OfflineListJson;
 
 public class OfflineListRequest extends BaseGoogleHttpClientSpiceRequest<OfflineListJson> {
 
-    String url = null;
-
     public OfflineListRequest() {
         super(OfflineListJson.class);
     }
@@ -30,9 +28,5 @@ public class OfflineListRequest extends BaseGoogleHttpClientSpiceRequest<Offline
         request.setParser(new JacksonFactory().createJsonObjectParser());
 
         return request.execute().parseAs(getResultType());
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 }

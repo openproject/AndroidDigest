@@ -9,8 +9,6 @@ import com.jayfeng.androiddigest.webservices.json.ToolListJson;
 
 public class ToolListRequest extends BaseGoogleHttpClientSpiceRequest<ToolListJson> {
 
-    String url = null;
-
     public ToolListRequest() {
         super(ToolListJson.class);
     }
@@ -30,9 +28,5 @@ public class ToolListRequest extends BaseGoogleHttpClientSpiceRequest<ToolListJs
         request.setParser(new JacksonFactory().createJsonObjectParser());
 
         return request.execute().parseAs(getResultType());
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 }
