@@ -16,6 +16,7 @@ public class MyApp extends Application {
         $.getInstance()
                 .context(getApplicationContext())
                 .log(BuildConfig.DEBUG, "DIGEST")
+                .update(null, 3)
                 .build();
     }
 }
