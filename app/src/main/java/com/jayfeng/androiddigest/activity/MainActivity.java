@@ -1,5 +1,6 @@
 package com.jayfeng.androiddigest.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -168,6 +169,8 @@ public class MainActivity extends BaseActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.menu_add) {
+            Intent intent = new Intent(this, AddReviewDigestActivity.class);
+            startActivity(intent);
             return true;
         } else if (id == R.id.menu_search) {
             return true;

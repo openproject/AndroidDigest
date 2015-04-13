@@ -2,7 +2,7 @@ package com.jayfeng.androiddigest.webservices.json;
 
 import com.google.api.client.util.Key;
 
-public class DigestJson {
+public class DigestJson extends StatusJson {
 
     @Key
     private int id;

@@ -45,6 +45,10 @@ public class Config {
         return sDomain + "android/digest/detail.php?id=" + id;
     }
 
+    public static String getAddReviewDigestUrl() {
+        return sDomain + "android/digest/review_post.php";
+    }
+
     public static String getBlogListUrl() {
         return sDomain + "android/blog/list.json";
     }
@@ -59,10 +63,6 @@ public class Config {
 
     public static String getReviewDigestListUrl(int page, int size) {
         return sDomain + "android/digest/list.php?table=android_digest_review&page=" + page + "&size=" + size;
-    }
-
-    public static String postReviewDigestUrl() {
-        return sDomain + "android/digest/review_post.php";
     }
 
     public static String getOfflineListUrl() {

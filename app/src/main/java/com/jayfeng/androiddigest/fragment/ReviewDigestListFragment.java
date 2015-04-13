@@ -30,6 +30,7 @@ import com.jayfeng.androiddigest.webservices.ReviewDigestListRequest;
 import com.jayfeng.androiddigest.webservices.json.ReviewDigestJson;
 import com.jayfeng.androiddigest.webservices.json.ReviewDigestListJson;
 import com.jayfeng.lesscode.core.AdapterLess;
+import com.jayfeng.lesscode.core.ToastLess;
 import com.jayfeng.lesscode.core.ViewLess;
 import com.octo.android.robospice.SpiceManager;
 import com.octo.android.robospice.persistence.DurationInMillis;
@@ -114,19 +115,13 @@ public class ReviewDigestListFragment extends Fragment implements OnScrollListen
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ReviewDigestJson reviewDigestJson = listData.get(position);
-                String type = reviewDigestJson.getType();
-                if (Config.JOKE_TYPE_HTML.equals(type)) {
-                    String url = reviewDigestJson.getUrl();
+                String url = reviewDigestJson.getUrl();
+                if (!TextUtils.isEmpty(url)) {
                     Intent intent = new Intent(getActivity(), WebViewActivity.class);
-//                    url = "http://www.baidu.com";
                     intent.putExtra(WebViewActivity.KEY_URL, url);
                     startActivity(intent);
                 } else {
-                    // default type text
-                    int detailId = reviewDigestJson.getId();
-                    Intent intent = new Intent(getActivity(), DigestDetailActivity.class);
-                    intent.putExtra(DigestDetailActivity.KEY_ID, detailId);
-                    startActivity(intent);
+                    ToastLess.$(getActivity(), "文章地址为空，无法打开此详情页。");
                 }
             }
         });

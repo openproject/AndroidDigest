@@ -51,6 +51,10 @@
             android:name=".activity.ToolListActivity"
             android:label="@string/title_activity_tool_list" >
         </activity>
+        <activity
+            android:name=".activity.AddReviewDigestActivity"
+            android:label="@string/title_activity_review_digest_add" >
+        </activity>
 
         <!-- umeng feedback activity -->
         <activity

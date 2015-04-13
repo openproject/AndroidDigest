@@ -14,6 +14,7 @@
     <string name="title_activity_web_view">正文</string>
     <string name="title_activity_offline">离线列表</string>
     <string name="title_activity_tool_list">工具箱列表</string>
+    <string name="title_activity_review_digest_add">加根干柴</string>
 
     <string name="tool_category_compoment_title">控件</string>
     <string name="tool_category_compoment_description">绚丽效果、功能强大的组件大全</string>
