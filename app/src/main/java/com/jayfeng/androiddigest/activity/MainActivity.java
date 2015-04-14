@@ -84,7 +84,7 @@ public class MainActivity extends BaseActivity
         fragmentTransaction.add(R.id.fragments, homeFragment, TAG_HOME).commit();
     }
 
-    public void changeFrament(Fragment fragment) {
+    public void changeFrament(Fragment fragment, String fragmentTag) {
 
         if (fragment == currentFragment) {
             return;
@@ -92,7 +92,7 @@ public class MainActivity extends BaseActivity
 
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         if (!fragment.isAdded()) {
-            fragmentTransaction.hide(currentFragment).add(R.id.fragments, fragment, fragment.getTag()).commit();
+            fragmentTransaction.hide(currentFragment).add(R.id.fragments, fragment, fragmentTag).commit();
         } else {
             fragmentTransaction.hide(currentFragment).show(fragment).commit();
         }
@@ -105,22 +105,13 @@ public class MainActivity extends BaseActivity
         if (isChecked) {
             switch (buttonView.getId()) {
                 case R.id.tab_home_btn:
-                    if (homeFragment == null) {
-                        homeFragment = fragmentManager.findFragmentByTag(TAG_HOME);
-                    }
-                    changeFrament(homeFragment);
+                    changeFrament(homeFragment, TAG_HOME);
                     break;
                 case R.id.tab_blog_btn:
-                    if (blogFragment == null) {
-                        blogFragment = fragmentManager.findFragmentByTag(TAG_BLOG);
-                    }
-                    changeFrament(blogFragment);
+                    changeFrament(blogFragment, TAG_BLOG);
                     break;
                 case R.id.tab_tool_btn:
-                    if (toolFragment == null) {
-                        toolFragment = fragmentManager.findFragmentByTag(TAG_TOOL);
-                    }
-                    changeFrament(toolFragment);
+                    changeFrament(toolFragment, TAG_TOOL);
                     break;
                 default:
                     break;
