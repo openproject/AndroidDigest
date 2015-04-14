@@ -3,10 +3,6 @@
 
 ##Next plan
 
-### 0.3
-> 1. 投稿
-> 2. 自动更新
-
 ###0.4
 > 1. 搜索
 
@@ -20,7 +16,7 @@
 ![app-0.2-screenshot](https://raw.githubusercontent.com/openproject/AndroidDigest/master/release/screenshot-0.2.png)
 
 ##Demo
-[下载地址](https://raw.githubusercontent.com/openproject/AndroidDigest/master/release/app-release-0.2.apk)
+[下载地址](http://jayfeng-files.stor.sinaapp.com/androiddigest/app-release-0.3.apk)
 
 ##编译
 1. Android Studio - Import Project
