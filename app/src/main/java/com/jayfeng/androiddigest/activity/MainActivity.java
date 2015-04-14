@@ -14,15 +14,25 @@ import android.widget.CompoundButton;
 import android.widget.RadioButton;
 
 import com.jayfeng.androiddigest.R;
+import com.jayfeng.androiddigest.config.Config;
 import com.jayfeng.androiddigest.fragment.BlogFragment;
 import com.jayfeng.androiddigest.fragment.HomeFragment;
 import com.jayfeng.androiddigest.fragment.ToolFragment;
+import com.jayfeng.androiddigest.service.HttpClientSpiceService;
+import com.jayfeng.androiddigest.webservices.UpdateRequest;
+import com.jayfeng.androiddigest.webservices.json.UpdateJson;
+import com.jayfeng.lesscode.core.UpdateLess;
 import com.jayfeng.lesscode.core.ViewLess;
+import com.octo.android.robospice.SpiceManager;
+import com.octo.android.robospice.persistence.exception.SpiceException;
+import com.octo.android.robospice.request.listener.RequestListener;
 import com.umeng.fb.FeedbackAgent;
 
 
 public class MainActivity extends BaseActivity
         implements RadioButton.OnCheckedChangeListener, View.OnClickListener {
+
+    private SpiceManager spiceManager = new SpiceManager(HttpClientSpiceService.class);
 
     private FragmentManager fragmentManager;
 
@@ -59,6 +69,8 @@ public class MainActivity extends BaseActivity
         // receive the feedback notification
         agent = new FeedbackAgent(this);
         agent.sync();
+
+        requestUpdateData();
     }
 
     private void init() {
@@ -149,6 +161,41 @@ public class MainActivity extends BaseActivity
         return false;
     }
 
+
+    /*
+     * =============================================================
+     * check update
+     * =============================================================
+     */
+
+    public void requestUpdateData() {
+        UpdateRequest request = new UpdateRequest();
+        request.setUrl(Config.getCheckUpdateUrl());
+        spiceManager.execute(request, new RequestListener<UpdateJson>() {
+            @Override
+            public void onRequestFailure(SpiceException spiceException) {
+
+            }
+
+            @Override
+            public void onRequestSuccess(UpdateJson updateJson) {
+                UpdateLess.$check(MainActivity.this,
+                        updateJson.getVercode(),
+                        updateJson.getVername(),
+                        updateJson.getDownload(),
+                        updateJson.getLog());
+            }
+        });
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        // when turn on developer option "don't keep activity"
+        // the fragments show and hide method will be invalid
+        // and, remove the onSaveInstranceState can fix that
+        // super.onSaveInstanceState(outState);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -167,5 +214,19 @@ public class MainActivity extends BaseActivity
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onStart() {
+        spiceManager.start(this);
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        if (spiceManager.isStarted()) {
+            spiceManager.shouldStop();
+        }
+        super.onStop();
     }
 }

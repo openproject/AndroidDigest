@@ -28,12 +28,9 @@ import com.jayfeng.androiddigest.activity.WebViewActivity;
 import com.jayfeng.androiddigest.config.Config;
 import com.jayfeng.androiddigest.service.HttpClientSpiceService;
 import com.jayfeng.androiddigest.webservices.DigestListRequest;
-import com.jayfeng.androiddigest.webservices.UpdateRequest;
 import com.jayfeng.androiddigest.webservices.json.DigestJson;
 import com.jayfeng.androiddigest.webservices.json.DigestListJson;
-import com.jayfeng.androiddigest.webservices.json.UpdateJson;
 import com.jayfeng.lesscode.core.AdapterLess;
-import com.jayfeng.lesscode.core.UpdateLess;
 import com.jayfeng.lesscode.core.ViewLess;
 import com.octo.android.robospice.SpiceManager;
 import com.octo.android.robospice.persistence.DurationInMillis;
@@ -70,8 +67,6 @@ public class DigestListFragment extends Fragment implements OnScrollListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        requestUpdateData();
     }
 
     @Override
@@ -299,32 +294,6 @@ public class DigestListFragment extends Fragment implements OnScrollListener {
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
         visibleLastIndex = firstVisibleItem + visibleItemCount - 1;
-    }
-
-    /*
-     * =============================================================
-     * check update
-     * =============================================================
-     */
-
-    public void requestUpdateData() {
-        UpdateRequest request = new UpdateRequest();
-        request.setUrl(Config.getCheckUpdateUrl());
-        spiceManager.execute(request, new RequestListener<UpdateJson>() {
-            @Override
-            public void onRequestFailure(SpiceException spiceException) {
-
-            }
-
-            @Override
-            public void onRequestSuccess(UpdateJson updateJson) {
-                UpdateLess.$check(getActivity(),
-                        updateJson.getVercode(),
-                        updateJson.getVername(),
-                        updateJson.getDownload(),
-                        updateJson.getLog());
-            }
-        });
     }
 
     @Override
