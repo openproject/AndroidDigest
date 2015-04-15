@@ -19,6 +19,7 @@
     <string name="title_activity_offline">离线列表</string>
     <string name="title_activity_tool_list">工具箱列表</string>
     <string name="title_activity_review_digest_add">加根干柴</string>
+    <string name="title_activity_search">搜索</string>
 
     <string name="tool_category_compoment_title">控件</string>
     <string name="tool_category_compoment_description">绚丽效果、功能强大的组件大全</string>
@@ -32,6 +33,9 @@
     <string name="tool_category_design_description">图赏好的设计，激活灵感</string>
     <string name="tool_category_project_title">项目</string>
     <string name="tool_category_project_description">完整的开源Android项目</string>
+
+    <string name="search_digest_text">文摘</string>
+    <string name="search_digest_tool">工具</string>
 
     <string name="settings_title">设置</string>
     <string name="settings_rating_title">喜欢干柴</string>

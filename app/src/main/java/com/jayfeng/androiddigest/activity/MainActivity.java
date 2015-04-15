@@ -218,6 +218,8 @@ public class MainActivity extends BaseActivity
             startActivity(intent);
             return true;
         } else if (id == R.id.menu_search) {
+            Intent intent = new Intent(this, SearchActivity.class);
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);

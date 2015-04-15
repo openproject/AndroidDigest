@@ -1,0 +1,47 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.MainActivity" >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="left"
+        android:background="#008AC4"
+        android:minHeight="?attr/actionBarSize" />
+
+    <RadioGroup
+        android:id="@+id/tabs"
+        android:gravity="center_vertical"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_below="@id/toolbar"
+        android:background="#fff"
+        android:layout_height="?attr/actionBarSize">
+
+        <RadioButton
+            android:id="@+id/search_digest_btn"
+            android:text="@string/search_digest_text"
+            style="@style/TabItemStyle"
+            android:checked="true" />
+
+        <RadioButton
+            android:id="@+id/search_tool_btn"
+            android:text="@string/search_digest_tool"
+            style="@style/TabItemStyle" />
+
+    </RadioGroup>
+
+    <LinearLayout
+        android:id="@+id/fragments"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tabs"
+        android:orientation="vertical" >
+    </LinearLayout>
+
+</RelativeLayout>

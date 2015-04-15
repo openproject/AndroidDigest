@@ -45,6 +45,10 @@ public class Config {
         return sDomain + "android/digest/detail.php?id=" + id;
     }
 
+    public static String getSearchDigestListUrl(String key, int page, int size) {
+        return sDomain + "android/digest/search.php?key=" + key + "&page=" + page + "&size=" + size;
+    }
+
     public static String getAddReviewDigestUrl() {
         return sDomain + "android/digest/review_post.php";
     }
