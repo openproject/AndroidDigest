@@ -29,7 +29,7 @@ import java.io.File;
 import java.text.DecimalFormat;
 
 /**
- * 设置页面
+ * Settings
  * Created by Codywang on 2015/4/15.
  */
 public class SettingsActivity extends BaseActivity implements View.OnClickListener {
@@ -55,17 +55,17 @@ public class SettingsActivity extends BaseActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         showToolbar();
-        toolbar.setSubtitleTextColor(getResources().getColor(android.R.color.white));
+
         initView();
     }
 
     private void initView() {
-        LinearLayout settings_likeapp_ll = ViewLess.$(this, R.id.settings_ratingapp_ll);//喜欢app
-        LinearLayout settings_updateapp_ll = ViewLess.$(this, R.id.settings_updateapp_ll);//更新app
-        LinearLayout settings_wipecache_ll = ViewLess.$(this, R.id.settings_wipecache_ll);//清理缓存
-        LinearLayout settings_aboutus_tv = ViewLess.$(this, R.id.settings_aboutus_tv);//关于我们
-        TextView settings_currentversion_tv = ViewLess.$(this, R.id.settings_currentversion_tv);//当前版本
-        settings_cachesize_tv = ViewLess.$(this, R.id.settings_cachesize_tv);//缓存大小
+        LinearLayout settings_likeapp_ll = ViewLess.$(this, R.id.settings_ratingapp_ll);
+        LinearLayout settings_updateapp_ll = ViewLess.$(this, R.id.settings_updateapp_ll);
+        LinearLayout settings_wipecache_ll = ViewLess.$(this, R.id.settings_wipecache_ll);
+        LinearLayout settings_aboutus_tv = ViewLess.$(this, R.id.settings_aboutus_tv);
+        TextView settings_currentversion_tv = ViewLess.$(this, R.id.settings_currentversion_tv);
+        settings_cachesize_tv = ViewLess.$(this, R.id.settings_cachesize_tv);
 
         settings_likeapp_ll.setOnClickListener(this);
         settings_updateapp_ll.setOnClickListener(this);
@@ -81,27 +81,25 @@ public class SettingsActivity extends BaseActivity implements View.OnClickListen
         switch (v.getId()) {
             case R.id.settings_ratingapp_ll:
                 ratingApp();
-                //打分
                 break;
             case R.id.settings_updateapp_ll:
-                //更新
                 requestUpdateData();
                 break;
             case R.id.settings_wipecache_ll:
                 wipeAppCahce();
-                //清理缓存
                 break;
             case R.id.settings_aboutus_tv:
                 Intent intent = new Intent(this, AboutUsActivity.class);
                 intent.putExtra("versionName", getVersionName());
                 startActivity(intent);
-                //关于我们
+                break;
+            default:
                 break;
         }
     }
 
     /**
-     * 清理应用缓存
+     * clean the cache
      */
     private void wipeAppCahce() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -122,7 +120,7 @@ public class SettingsActivity extends BaseActivity implements View.OnClickListen
                 }).start();
             }
         });
-        builder.setNegativeButton(R.string.action_confirm, new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.action_negative, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -133,7 +131,7 @@ public class SettingsActivity extends BaseActivity implements View.OnClickListen
     }
 
     /**
-     * 给应用好评
+     * open the app in market
      */
     private void ratingApp() {
         Uri uri = Uri.parse("market://details?id=" + getPackageName());
@@ -142,12 +140,12 @@ public class SettingsActivity extends BaseActivity implements View.OnClickListen
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         } else {
-            Toast.makeText(this, "亲，请先安装任一款应用市场！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.settings_rating_no_market, Toast.LENGTH_SHORT).show();
         }
     }
 
     /**
-     * 请求更新
+     * check update
      */
     private void requestUpdateData() {
         UpdateRequest request = new UpdateRequest();
@@ -194,7 +192,7 @@ public class SettingsActivity extends BaseActivity implements View.OnClickListen
                 dirSize += file.length();
             } else if (file.isDirectory()) {
                 dirSize += file.length();
-                dirSize += getDirSize(file); // 如果遇到目录则通过递归调用继续统计
+                dirSize += getDirSize(file);
             }
         }
         return dirSize;

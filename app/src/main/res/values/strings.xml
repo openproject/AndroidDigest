@@ -37,6 +37,7 @@
     <string name="settings_rating_title">喜欢干柴</string>
     <string name="settings_confirm_wipecache">"您确定要清除缓存吗?"</string>
     <string name="settings_rating_description">去应用市场给干柴打分</string>
+    <string name="settings_rating_no_market">没找到应用市场</string>
     <string name="settings_update_title">版本更新版本更新</string>
     <string name="settings_update_description">当前版本: </string>
     <string name="settings_wipe_cache_title">清除缓存</string>

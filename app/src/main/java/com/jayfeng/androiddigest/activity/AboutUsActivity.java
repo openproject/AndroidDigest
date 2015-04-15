@@ -9,7 +9,7 @@ import com.jayfeng.androiddigest.R;
 import com.jayfeng.lesscode.core.ViewLess;
 
 /**
- * 关于我们
+ * About us
  * Created by Codywang on 2015/4/15.
  */
 public class AboutUsActivity extends BaseActivity {

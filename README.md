@@ -19,8 +19,7 @@
 [下载地址](http://jayfeng-files.stor.sinaapp.com/androiddigest/app-release-0.3.apk)
 
 ##编译
-1. Android Studio - Import Project
-2. 重命名gradle.properties.release为gradle.properties或者把里面的内容拷贝到你的gradle.properties，可解决编译时需要release的singingConfig的错误
+1. 复制gradle.properties.release为gradle.properties或者把里面的内容拷贝到你的gradle.properties，可解决编译时需要release的singingConfig的错误
 3. 如果提示找不到 sdk xx version 或者build Tool version, 更新一下sdk即可
 
 #加入我们
