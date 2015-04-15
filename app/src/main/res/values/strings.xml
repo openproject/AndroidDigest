@@ -1,9 +1,13 @@
 <resources>
     <string name="app_name">干柴</string>
     <string name="app_description">专注于Android干货资源</string>
+    <string name="app_github"><a href="https://github.com/openproject/AndroidDigest">干柴的Github</a></string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <string name="action_confirm">确定</string>
+    <string name="action_negative">取消</string>
 
     <string name="tab_home_text">最新</string>
     <string name="tab_blog_text">站点/博客</string>
@@ -28,4 +32,17 @@
     <string name="tool_category_design_description">图赏好的设计，激活灵感</string>
     <string name="tool_category_project_title">项目</string>
     <string name="tool_category_project_description">完整的开源Android项目</string>
+
+    <string name="settings_title">设置</string>
+    <string name="settings_rating_title">喜欢干柴</string>
+    <string name="settings_confirm_wipecache">"您确定要清除缓存吗?"</string>
+    <string name="settings_rating_description">去应用市场给干柴打分</string>
+    <string name="settings_update_title">版本更新版本更新</string>
+    <string name="settings_update_description">当前版本: </string>
+    <string name="settings_wipe_cache_title">清除缓存</string>
+    <string name="settings_wipe_cache_description">当前缓存: </string>
+    <string name="settings_about_us_title">关于</string>
+    <string name="settings_about_us_description">关于干柴</string>
+
+    <string name="about_us_title">关于</string>
 </resources>

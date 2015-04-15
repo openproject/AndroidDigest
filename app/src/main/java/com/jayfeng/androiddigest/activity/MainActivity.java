@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import com.jayfeng.androiddigest.R;
 import com.jayfeng.androiddigest.config.Config;
@@ -147,8 +148,14 @@ public class MainActivity extends BaseActivity
         popup.getMenuInflater().inflate(R.menu.more_popup_menu, popup.getMenu());
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
-                if (item.getItemId() == R.id.more_menu_post) {
-                    agent.startFeedbackActivity();
+                switch (item.getItemId()) {
+                    case R.id.more_menu_post:
+                        agent.startFeedbackActivity();
+                        break;
+                    case R.id.more_menu_setting:
+                        Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                        startActivity(intent);
+                        break;
                 }
                 return true;
             }
