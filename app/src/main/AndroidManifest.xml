@@ -56,6 +56,11 @@
             android:label="@string/title_activity_review_digest_add" >
         </activity>
 
+        <activity android:name=".activity.SettingsActivity"
+            android:label="@string/settings_title"/>
+
+        <activity android:name=".activity.AboutUsActivity"
+            android:label="@string/about_us_title"/>
         <!-- umeng feedback activity -->
         <activity
             android:name="com.umeng.fb.ConversationActivity"/>
