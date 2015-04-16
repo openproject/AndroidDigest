@@ -13,7 +13,7 @@
         android:minHeight="?attr/actionBarSize" />
 
     <LinearLayout
-        android:id="@+id/settings_ratingapp_ll"
+        android:id="@+id/ratingapp_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"
@@ -44,7 +44,7 @@
         android:background="#ddd" />
 
     <LinearLayout
-        android:id="@+id/settings_updateapp_ll"
+        android:id="@+id/updateapp_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"
@@ -63,7 +63,7 @@
             android:text="@string/settings_update_title" />
 
         <TextView
-            android:id="@+id/settings_currentversion_tv"
+            android:id="@+id/version_current"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14sp" />
@@ -75,7 +75,7 @@
         android:background="#ddd" />
 
     <LinearLayout
-        android:id="@+id/settings_wipecache_ll"
+        android:id="@+id/wipecache_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"
@@ -106,7 +106,7 @@
         android:background="#ddd" />
 
     <LinearLayout
-        android:id="@+id/settings_aboutus_tv"
+        android:id="@+id/aboutus_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"

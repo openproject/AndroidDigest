@@ -19,6 +19,8 @@ import com.jayfeng.androiddigest.config.Config;
 import com.jayfeng.androiddigest.service.HttpClientSpiceService;
 import com.jayfeng.androiddigest.webservices.UpdateRequest;
 import com.jayfeng.androiddigest.webservices.json.UpdateJson;
+import com.jayfeng.lesscode.core.AppLess;
+import com.jayfeng.lesscode.core.ToastLess;
 import com.jayfeng.lesscode.core.UpdateLess;
 import com.jayfeng.lesscode.core.ViewLess;
 import com.octo.android.robospice.SpiceManager;
@@ -35,8 +37,10 @@ import java.text.DecimalFormat;
 public class SettingsActivity extends BaseActivity implements View.OnClickListener {
 
     public static final int MSG_CLEAR_CACHE_COMPLET = 100;
-    private TextView settings_cachesize_tv;
+
     private SpiceManager spiceManager = new SpiceManager(HttpClientSpiceService.class);
+
+    private TextView cacheSizeView;
 
     private Handler mHandler = new Handler() {
         @Override
@@ -44,7 +48,7 @@ public class SettingsActivity extends BaseActivity implements View.OnClickListen
             super.handleMessage(msg);
             switch (msg.what) {
                 case MSG_CLEAR_CACHE_COMPLET:
-                    settings_cachesize_tv.setText(getResources().getString(R.string.settings_wipe_cache_description) + " " + getCacheSize(SettingsActivity.this));
+                    cacheSizeView.setText(getResources().getString(R.string.settings_wipe_cache_description) + " " + getCacheSize(SettingsActivity.this));
                     break;
             }
         }
@@ -60,37 +64,37 @@ public class SettingsActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void initView() {
-        LinearLayout settings_likeapp_ll = ViewLess.$(this, R.id.settings_ratingapp_ll);
-        LinearLayout settings_updateapp_ll = ViewLess.$(this, R.id.settings_updateapp_ll);
-        LinearLayout settings_wipecache_ll = ViewLess.$(this, R.id.settings_wipecache_ll);
-        LinearLayout settings_aboutus_tv = ViewLess.$(this, R.id.settings_aboutus_tv);
-        TextView settings_currentversion_tv = ViewLess.$(this, R.id.settings_currentversion_tv);
-        settings_cachesize_tv = ViewLess.$(this, R.id.settings_cachesize_tv);
+        LinearLayout ratingAppContainer = ViewLess.$(this, R.id.ratingapp_container);
+        LinearLayout updateAppContainer = ViewLess.$(this, R.id.updateapp_container);
+        LinearLayout wipeCacheContainer = ViewLess.$(this, R.id.wipecache_container);
+        LinearLayout aboutusContainer = ViewLess.$(this, R.id.aboutus_container);
+        TextView currentVersionView = ViewLess.$(this, R.id.version_current);
+        cacheSizeView = ViewLess.$(this, R.id.settings_cachesize_tv);
 
-        settings_likeapp_ll.setOnClickListener(this);
-        settings_updateapp_ll.setOnClickListener(this);
-        settings_wipecache_ll.setOnClickListener(this);
-        settings_aboutus_tv.setOnClickListener(this);
+        ratingAppContainer.setOnClickListener(this);
+        updateAppContainer.setOnClickListener(this);
+        wipeCacheContainer.setOnClickListener(this);
+        aboutusContainer.setOnClickListener(this);
 
-        settings_cachesize_tv.setText(getResources().getString(R.string.settings_wipe_cache_description) + " " + getCacheSize(this));
-        settings_currentversion_tv.setText(getResources().getString(R.string.settings_update_description) + " " + getVersionName());
+        cacheSizeView.setText(getResources().getString(R.string.settings_wipe_cache_description) + " " + getCacheSize(this));
+        currentVersionView.setText(getResources().getString(R.string.settings_update_description) + " " + AppLess.$vername(this));
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.settings_ratingapp_ll:
+            case R.id.ratingapp_container:
                 ratingApp();
                 break;
-            case R.id.settings_updateapp_ll:
+            case R.id.updateapp_container:
                 requestUpdateData();
                 break;
-            case R.id.settings_wipecache_ll:
+            case R.id.wipecache_container:
                 wipeAppCahce();
                 break;
-            case R.id.settings_aboutus_tv:
+            case R.id.aboutus_container:
                 Intent intent = new Intent(this, AboutUsActivity.class);
-                intent.putExtra("versionName", getVersionName());
+                intent.putExtra("versionName", AppLess.$vername(this));
                 startActivity(intent);
                 break;
             default:
@@ -158,11 +162,15 @@ public class SettingsActivity extends BaseActivity implements View.OnClickListen
 
             @Override
             public void onRequestSuccess(UpdateJson updateJson) {
-                UpdateLess.$check(SettingsActivity.this,
+                boolean hasUpdate = UpdateLess.$check(SettingsActivity.this,
                         updateJson.getVercode(),
                         updateJson.getVername(),
                         updateJson.getDownload(),
                         updateJson.getLog());
+                // if no update, toast a no update tips
+                if (!hasUpdate) {
+                    ToastLess.$(SettingsActivity.this, R.string.settings_update_no_update);
+                }
             }
         });
     }
@@ -212,16 +220,6 @@ public class SettingsActivity extends BaseActivity implements View.OnClickListen
                 }
             }
         }
-    }
-
-    private String getVersionName() {
-        String version = "";
-        try {
-            version = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        return version;
     }
 
     @Override
