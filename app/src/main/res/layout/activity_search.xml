@@ -26,12 +26,14 @@
         <RadioButton
             android:id="@+id/search_digest_btn"
             android:text="@string/search_digest_text"
+            android:drawableBottom="@drawable/tab_indicator_bottom"
             style="@style/TabItemStyle"
             android:checked="true" />
 
         <RadioButton
             android:id="@+id/search_tool_btn"
             android:text="@string/search_digest_tool"
+            android:drawableBottom="@drawable/tab_indicator_bottom"
             style="@style/TabItemStyle" />
 
     </RadioGroup>
