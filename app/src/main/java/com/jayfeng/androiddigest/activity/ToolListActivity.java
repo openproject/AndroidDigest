@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.jayfeng.androiddigest.R;
 import com.jayfeng.androiddigest.config.Config;
 import com.jayfeng.androiddigest.service.HttpClientSpiceService;
-import com.jayfeng.androiddigest.webservices.ToolListRequest;
+import com.jayfeng.androiddigest.webservices.BaseRequest;
 import com.jayfeng.androiddigest.webservices.json.ToolJson;
 import com.jayfeng.androiddigest.webservices.json.ToolListJson;
 import com.jayfeng.lesscode.core.AdapterLess;
@@ -104,7 +104,7 @@ public class ToolListActivity extends BaseActivity {
      */
 
     private void requestNetworkData() {
-        ToolListRequest request = new ToolListRequest();
+        BaseRequest<ToolListJson> request = new BaseRequest<>(ToolListJson.class);
         request.setUrl(getListUrl());
         spiceManager.getFromCacheAndLoadFromNetworkIfExpired(request,
                 getCacheKey(),

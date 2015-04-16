@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
-import android.widget.Toast;
 
 import com.jayfeng.androiddigest.R;
 import com.jayfeng.androiddigest.config.Config;
@@ -20,7 +19,7 @@ import com.jayfeng.androiddigest.fragment.BlogFragment;
 import com.jayfeng.androiddigest.fragment.HomeFragment;
 import com.jayfeng.androiddigest.fragment.ToolFragment;
 import com.jayfeng.androiddigest.service.HttpClientSpiceService;
-import com.jayfeng.androiddigest.webservices.UpdateRequest;
+import com.jayfeng.androiddigest.webservices.BaseRequest;
 import com.jayfeng.androiddigest.webservices.json.UpdateJson;
 import com.jayfeng.lesscode.core.UpdateLess;
 import com.jayfeng.lesscode.core.ViewLess;
@@ -176,7 +175,7 @@ public class MainActivity extends BaseActivity
      */
 
     public void requestUpdateData() {
-        UpdateRequest request = new UpdateRequest();
+        BaseRequest<UpdateJson> request = new BaseRequest<>(UpdateJson.class);
         request.setUrl(Config.getCheckUpdateUrl());
         spiceManager.execute(request, new RequestListener<UpdateJson>() {
             @Override

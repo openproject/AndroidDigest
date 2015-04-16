@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,7 +16,7 @@ import android.widget.Toast;
 import com.jayfeng.androiddigest.R;
 import com.jayfeng.androiddigest.config.Config;
 import com.jayfeng.androiddigest.service.HttpClientSpiceService;
-import com.jayfeng.androiddigest.webservices.UpdateRequest;
+import com.jayfeng.androiddigest.webservices.BaseRequest;
 import com.jayfeng.androiddigest.webservices.json.UpdateJson;
 import com.jayfeng.lesscode.core.AppLess;
 import com.jayfeng.lesscode.core.ToastLess;
@@ -152,7 +151,7 @@ public class SettingsActivity extends BaseActivity implements View.OnClickListen
      * check update
      */
     private void requestUpdateData() {
-        UpdateRequest request = new UpdateRequest();
+        BaseRequest<UpdateJson> request = new BaseRequest<>(UpdateJson.class);
         request.setUrl(Config.getCheckUpdateUrl());
         spiceManager.execute(request, new RequestListener<UpdateJson>() {
             @Override

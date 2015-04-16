@@ -5,17 +5,17 @@ import com.google.api.client.http.HttpContent;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.UrlEncodedContent;
 import com.google.api.client.json.jackson2.JacksonFactory;
-import com.jayfeng.androiddigest.webservices.json.DigestJson;
-import com.jayfeng.androiddigest.webservices.json.UpdateJson;
+import com.jayfeng.androiddigest.webservices.BaseGoogleHttpClientSpiceRequest;
+import com.jayfeng.androiddigest.webservices.json.DigestListJson;
 
-public class UpdateRequest extends BaseGoogleHttpClientSpiceRequest<UpdateJson> {
+public class BaseRequest<T> extends BaseGoogleHttpClientSpiceRequest<T> {
 
-    public UpdateRequest() {
-        super(UpdateJson.class);
+    public BaseRequest(Class<T> clazz) {
+        super(clazz);
     }
 
     @Override
-    public UpdateJson loadDataFromNetwork() throws Exception {
+    public T loadDataFromNetwork() throws Exception {
 
         HttpRequest request = null;
         GenericUrl genericUrl = new GenericUrl(url);
@@ -30,5 +30,4 @@ public class UpdateRequest extends BaseGoogleHttpClientSpiceRequest<UpdateJson> 
 
         return request.execute().parseAs(getResultType());
     }
-
 }

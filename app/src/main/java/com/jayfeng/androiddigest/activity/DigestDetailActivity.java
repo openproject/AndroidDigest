@@ -6,7 +6,7 @@ import android.widget.TextView;
 import com.jayfeng.androiddigest.R;
 import com.jayfeng.androiddigest.config.Config;
 import com.jayfeng.androiddigest.service.HttpClientSpiceService;
-import com.jayfeng.androiddigest.webservices.DigestRequest;
+import com.jayfeng.androiddigest.webservices.BaseRequest;
 import com.jayfeng.androiddigest.webservices.json.DigestJson;
 import com.jayfeng.lesscode.core.ViewLess;
 import com.octo.android.robospice.SpiceManager;
@@ -38,7 +38,7 @@ public class DigestDetailActivity extends BaseActivity {
     }
 
     private void requestNetworkData() {
-        DigestRequest request = new DigestRequest();
+        BaseRequest<DigestJson> request = new BaseRequest<>(DigestJson.class);
         request.setUrl(Config.getDigestDetailUrl(id));
         spiceManager.getFromCacheAndLoadFromNetworkIfExpired(request,
                 "joke_detail_id_" + id,

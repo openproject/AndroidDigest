@@ -8,7 +8,7 @@ import android.widget.EditText;
 import com.jayfeng.androiddigest.R;
 import com.jayfeng.androiddigest.config.Config;
 import com.jayfeng.androiddigest.service.HttpClientSpiceService;
-import com.jayfeng.androiddigest.webservices.ReviewDigestRequest;
+import com.jayfeng.androiddigest.webservices.BaseRequest;
 import com.jayfeng.androiddigest.webservices.json.ReviewDigestJson;
 import com.jayfeng.lesscode.core.ToastLess;
 import com.jayfeng.lesscode.core.ViewLess;
@@ -80,7 +80,7 @@ public class AddReviewDigestActivity extends BaseActivity {
         postParamters.put("deliver", deliver);
         postParamters.put("reviewer", reviewer);
 
-        ReviewDigestRequest request = new ReviewDigestRequest();
+        BaseRequest<ReviewDigestJson> request = new BaseRequest<>(ReviewDigestJson.class);
         request.setUrl(Config.getAddReviewDigestUrl());
         request.setPostParameters(postParamters);
         spiceManager.execute(request, new RequestListener<ReviewDigestJson>() {
