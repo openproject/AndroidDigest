@@ -1,12 +1,18 @@
 package com.jayfeng.androiddigest.activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.interfaces.DraweeController;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jayfeng.androiddigest.R;
 import com.jayfeng.androiddigest.config.Config;
 import com.jayfeng.androiddigest.service.HttpClientSpiceService;
@@ -29,6 +35,7 @@ import in.srain.cube.views.ptr.PtrFrameLayout;
 
 public class ToolListActivity extends BaseActivity {
 
+    public static final String KEY_TITLE = "title";
     public static final String KEY_TYPE = "type";
 
     private SpiceManager spiceManager = new SpiceManager(HttpClientSpiceService.class);
@@ -40,6 +47,7 @@ public class ToolListActivity extends BaseActivity {
     private PtrClassicFrameLayout ptrFrame;
     private View errorView;
 
+    private String title;
     private String type;
 
     @Override
@@ -49,7 +57,11 @@ public class ToolListActivity extends BaseActivity {
 
         showToolbar();
 
+        title = getIntent().getStringExtra(KEY_TITLE);
         type = getIntent().getStringExtra(KEY_TYPE);
+        if (title != null) {
+            setTitle(title);
+        }
 
         listView = ViewLess.$(this, R.id.listview);
         errorView = ViewLess.$(this, R.id.error);
@@ -80,19 +92,10 @@ public class ToolListActivity extends BaseActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                String type = listData.get(position).getType();
-//                String url = listData.get(position).getUrl();
-//                String title = listData.get(position).getTitle();
-//                if (Config.OFFLINE_TYPE_DIR.equals(type)) {
-//                    Intent intent = new Intent(ToolListActivity.this, OfflineActivity.class);
-//                    intent.putExtra(OfflineActivity.KEY_URL, url);
-//                    intent.putExtra(OfflineActivity.KEY_TITLE, title);
-//                    startActivity(intent);
-//                } else if (Config.OFFLINE_TYPE_HTML.equals(type)) {
-//                    Intent intent = new Intent(ToolListActivity.this, WebViewActivity.class);
-//                    intent.putExtra(WebViewActivity.KEY_URL, url);
-//                    startActivity(intent);
-//                }
+                String url = listData.get(position).getUrl();
+                Intent intent = new Intent(ToolListActivity.this, WebViewActivity.class);
+                intent.putExtra(WebViewActivity.KEY_URL, url);
+                startActivity(intent);
             }
         });
     }
@@ -159,9 +162,21 @@ public class ToolListActivity extends BaseActivity {
                     public View getView(int i, View view, AdapterLess.ViewHolder viewHolder, ToolJson toolJson) {
                         TextView titleView = viewHolder.$view(view, R.id.title);
                         TextView descriptionView = viewHolder.$view(view, R.id.description);
+                        SimpleDraweeView draweeView = viewHolder.$view(view,R.id.thumbnail);
 
                         titleView.setText(toolJson.getTitle());
                         descriptionView.setText(toolJson.getDescription());
+                        if (!TextUtils.isEmpty(toolJson.getThumbnail())) {
+                            Uri uri = Uri.parse(toolJson.getThumbnail());
+                            DraweeController controller = Fresco.newDraweeControllerBuilder()
+                                    .setUri(uri)
+                                    .setAutoPlayAnimations(true)
+                                    .build();
+                            draweeView.setController(controller);
+                            draweeView.setVisibility(View.VISIBLE);
+                        } else {
+                            draweeView.setVisibility(View.GONE);
+                        }
                         return view;
                     }
                 });
