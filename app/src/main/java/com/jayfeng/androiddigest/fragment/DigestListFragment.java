@@ -24,8 +24,10 @@ import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.jayfeng.androiddigest.R;
 import com.jayfeng.androiddigest.activity.DigestDetailActivity;
+import com.jayfeng.androiddigest.activity.SearchActivity;
 import com.jayfeng.androiddigest.activity.WebViewActivity;
 import com.jayfeng.androiddigest.config.Config;
+import com.jayfeng.androiddigest.listener.Searchable;
 import com.jayfeng.androiddigest.service.HttpClientSpiceService;
 import com.jayfeng.androiddigest.webservices.BaseRequest;
 import com.jayfeng.androiddigest.webservices.json.DigestJson;
@@ -43,7 +45,7 @@ import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
-public class DigestListFragment extends Fragment implements OnScrollListener {
+public class DigestListFragment extends Fragment implements OnScrollListener, Searchable {
 
     private SpiceManager spiceManager = new SpiceManager(HttpClientSpiceService.class);
 
@@ -60,6 +62,9 @@ public class DigestListFragment extends Fragment implements OnScrollListener {
     private int page = Config.PAGE_START;
     private int size = Config.PAGE_SIZE;
 
+    private boolean isSearch = false;
+    private String searchKey;
+
     public DigestListFragment() {
         // Required empty public constructor
     }
@@ -67,6 +72,11 @@ public class DigestListFragment extends Fragment implements OnScrollListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (getArguments() != null
+                &&SearchActivity.TYPE_SEARCH.equals(getArguments().getString(SearchActivity.KEY_TYPE))) {
+            isSearch = true;
+        }
     }
 
     @Override
@@ -141,9 +151,9 @@ public class DigestListFragment extends Fragment implements OnScrollListener {
 
     private void requestNetworkData() {
         BaseRequest<DigestListJson> request = new BaseRequest<>(DigestListJson.class);
-        request.setUrl(Config.getDigestListUrl(page, size));
+        request.setUrl(getUrl(page, size));
         spiceManager.getFromCacheAndLoadFromNetworkIfExpired(request,
-                "digest_list_page_" + page + "_size_" + size,
+                getCacheKey(page, size),
                 DurationInMillis.NEVER, new RequestListener<DigestListJson>() {
                     @Override
                     public void onRequestFailure(SpiceException spiceException) {
@@ -170,7 +180,7 @@ public class DigestListFragment extends Fragment implements OnScrollListener {
 
     private void showCacheData() {
         spiceManager.getFromCache(DigestListJson.class,
-                "digest_list_page_" + page + "_size_" + size,
+                (isSearch?"search":"") + "digest_list_page_" + page + "_size_" + size,
                 DurationInMillis.ALWAYS_RETURNED, new RequestListener<DigestListJson>() {
                     @Override
                     public void onRequestFailure(SpiceException spiceException) {
@@ -244,7 +254,7 @@ public class DigestListFragment extends Fragment implements OnScrollListener {
     private void moreNetworkData() {
         int nextPage = page + 1;
         BaseRequest<DigestListJson> request = new BaseRequest<>(DigestListJson.class);
-        request.setUrl(Config.getDigestListUrl(nextPage, size));
+        request.setUrl(getUrl(nextPage, size));
         spiceManager.execute(request, new RequestListener<DigestListJson>() {
             @Override
             public void onRequestFailure(SpiceException spiceException) {
@@ -279,6 +289,35 @@ public class DigestListFragment extends Fragment implements OnScrollListener {
         if (listView.getFooterViewsCount() == 0) {
             listView.addFooterView(footerView);
         }
+    }
+
+    /*
+     * =============================================================
+     * search page data
+     * =============================================================
+     */
+
+    @Override
+    public void search(String key) {
+        searchKey = key;
+
+        ptrFrame.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ptrFrame.autoRefresh();
+            }
+        }, 100);
+    }
+
+    private String getUrl(int page, int size) {
+        if (isSearch) {
+            return Config.getSearchDigestListUrl(searchKey, page, size);
+        }
+        return Config.getDigestListUrl(page, size);
+    }
+
+    private String getCacheKey(int page, int size) {
+        return (isSearch ? "search_" + searchKey + "_" : "") + "digest_list_page_" + page + "_size_" + size;
     }
 
     @Override

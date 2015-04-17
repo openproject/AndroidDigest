@@ -11,7 +11,27 @@
         android:layout_alignParentTop="true"
         android:layout_gravity="left"
         android:background="#008AC4"
-        android:minHeight="?attr/actionBarSize" />
+        android:minHeight="?attr/actionBarSize">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText android:id="@+id/search_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:singleLine="true"
+                android:hint="请输入你要搜索的关键字"
+                android:textColor="#fff"/>
+
+            <ImageView android:id="@+id/search_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@mipmap/menu_search"/>
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
 
     <RadioGroup
         android:id="@+id/tabs"

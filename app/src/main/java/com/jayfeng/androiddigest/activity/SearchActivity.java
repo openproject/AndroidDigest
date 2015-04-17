@@ -4,23 +4,32 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 
 import com.jayfeng.androiddigest.R;
 import com.jayfeng.androiddigest.fragment.DigestListFragment;
 import com.jayfeng.androiddigest.fragment.ToolListFragment;
+import com.jayfeng.androiddigest.listener.Searchable;
 import com.jayfeng.lesscode.core.ViewLess;
 
 
 public class SearchActivity extends BaseActivity
         implements RadioButton.OnCheckedChangeListener {
 
-    private FragmentManager fragmentManager;
+    public static final String KEY_TYPE = "type";
+    public static final String TYPE_SEARCH = "search";
 
     private static final String TAG_DIGEST = "digest";
     private static final String TAG_TOOL = "tool";
 
+    private FragmentManager fragmentManager;
+
+    private EditText searchEdit;
+    private ImageView searchIcon;
     private RadioButton digestTabBtn;
     private RadioButton toolTabBtn;
 
@@ -40,16 +49,32 @@ public class SearchActivity extends BaseActivity
     }
 
     private void init() {
+        searchEdit = ViewLess.$(this, R.id.search_edit);
+        searchIcon = ViewLess.$(this, R.id.search_icon);
         digestTabBtn = ViewLess.$(this, R.id.search_digest_btn);
         toolTabBtn = ViewLess.$(this, R.id.search_tool_btn);
 
         digestTabBtn.setOnCheckedChangeListener(this);
         toolTabBtn.setOnCheckedChangeListener(this);
 
+        Bundle bundle = new Bundle();
+        bundle.putString(KEY_TYPE, TYPE_SEARCH);
         currentFragment = digestFragment = new DigestListFragment();
         toolFragment = new ToolListFragment();
+        digestFragment.setArguments(bundle);
+        toolFragment.setArguments(bundle);
 
         initFragment();
+
+        searchIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String key = searchEdit.getText().toString();
+                if (digestTabBtn.isChecked()) {
+                    ((Searchable)digestFragment).search(key);
+                }
+            }
+        });
     }
 
     private void initFragment() {
