@@ -19,7 +19,7 @@ import com.jayfeng.androiddigest.activity.OfflineActivity;
 import com.jayfeng.androiddigest.activity.WebViewActivity;
 import com.jayfeng.androiddigest.config.Config;
 import com.jayfeng.androiddigest.service.HttpClientSpiceService;
-import com.jayfeng.androiddigest.webservices.BaseRequest;
+import com.jayfeng.androiddigest.webservices.JsonRequest;
 import com.jayfeng.androiddigest.webservices.json.OfflineJson;
 import com.jayfeng.androiddigest.webservices.json.OfflineListJson;
 import com.jayfeng.lesscode.core.AdapterLess;
@@ -124,7 +124,7 @@ public class OfflineFragment extends Fragment {
      */
 
     private void requestNetworkData() {
-        BaseRequest<OfflineListJson> request = new BaseRequest<>(OfflineListJson.class);
+        JsonRequest<OfflineListJson> request = new JsonRequest<>(OfflineListJson.class);
         request.setUrl(getListUrl());
         spiceManager.getFromCacheAndLoadFromNetworkIfExpired(request,
                 getCacheKey(),

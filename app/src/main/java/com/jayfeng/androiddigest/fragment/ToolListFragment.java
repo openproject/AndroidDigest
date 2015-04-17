@@ -27,7 +27,7 @@ import com.jayfeng.androiddigest.activity.DigestDetailActivity;
 import com.jayfeng.androiddigest.activity.WebViewActivity;
 import com.jayfeng.androiddigest.config.Config;
 import com.jayfeng.androiddigest.service.HttpClientSpiceService;
-import com.jayfeng.androiddigest.webservices.BaseRequest;
+import com.jayfeng.androiddigest.webservices.JsonRequest;
 import com.jayfeng.androiddigest.webservices.json.DigestJson;
 import com.jayfeng.androiddigest.webservices.json.DigestListJson;
 import com.jayfeng.lesscode.core.AdapterLess;
@@ -140,7 +140,7 @@ public class ToolListFragment extends Fragment implements OnScrollListener {
      */
 
     private void requestNetworkData() {
-        BaseRequest<DigestListJson> request = new BaseRequest<>(DigestListJson.class);
+        JsonRequest<DigestListJson> request = new JsonRequest<>(DigestListJson.class);
         request.setUrl(Config.getDigestListUrl(page, size));
         spiceManager.getFromCacheAndLoadFromNetworkIfExpired(request,
                 "digest_list_page_" + page + "_size_" + size,
@@ -243,7 +243,7 @@ public class ToolListFragment extends Fragment implements OnScrollListener {
 
     private void moreNetworkData() {
         int nextPage = page + 1;
-        BaseRequest<DigestListJson> request = new BaseRequest<>(DigestListJson.class);
+        JsonRequest<DigestListJson> request = new JsonRequest<>(DigestListJson.class);
         request.setUrl(Config.getDigestListUrl(nextPage, size));
         spiceManager.execute(request, new RequestListener<DigestListJson>() {
             @Override

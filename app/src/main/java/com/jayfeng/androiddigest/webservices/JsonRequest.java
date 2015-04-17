@@ -10,12 +10,12 @@ import com.octo.android.robospice.request.googlehttpclient.GoogleHttpClientSpice
 import java.io.IOException;
 import java.util.HashMap;
 
-public class BaseRequest<T> extends GoogleHttpClientSpiceRequest<T> {
+public class JsonRequest<T> extends GoogleHttpClientSpiceRequest<T> {
 
     String url = null;
     HashMap<String, String > postParameters;
 
-    public BaseRequest(Class<T> clazz) {
+    public JsonRequest(Class<T> clazz) {
         super(clazz);
     }
 

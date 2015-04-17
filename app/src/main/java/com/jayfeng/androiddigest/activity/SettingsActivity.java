@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.jayfeng.androiddigest.R;
 import com.jayfeng.androiddigest.config.Config;
 import com.jayfeng.androiddigest.service.HttpClientSpiceService;
-import com.jayfeng.androiddigest.webservices.BaseRequest;
+import com.jayfeng.androiddigest.webservices.JsonRequest;
 import com.jayfeng.androiddigest.webservices.json.UpdateJson;
 import com.jayfeng.lesscode.core.AppLess;
 import com.jayfeng.lesscode.core.ToastLess;
@@ -151,7 +151,7 @@ public class SettingsActivity extends BaseActivity implements View.OnClickListen
      * check update
      */
     private void requestUpdateData() {
-        BaseRequest<UpdateJson> request = new BaseRequest<>(UpdateJson.class);
+        JsonRequest<UpdateJson> request = new JsonRequest<>(UpdateJson.class);
         request.setUrl(Config.getCheckUpdateUrl());
         spiceManager.execute(request, new RequestListener<UpdateJson>() {
             @Override

@@ -25,7 +25,7 @@ import com.jayfeng.androiddigest.R;
 import com.jayfeng.androiddigest.activity.WebViewActivity;
 import com.jayfeng.androiddigest.config.Config;
 import com.jayfeng.androiddigest.service.HttpClientSpiceService;
-import com.jayfeng.androiddigest.webservices.BaseRequest;
+import com.jayfeng.androiddigest.webservices.JsonRequest;
 import com.jayfeng.androiddigest.webservices.json.ReviewDigestJson;
 import com.jayfeng.androiddigest.webservices.json.ReviewDigestListJson;
 import com.jayfeng.lesscode.core.AdapterLess;
@@ -133,7 +133,7 @@ public class ReviewDigestListFragment extends Fragment implements OnScrollListen
      */
 
     private void requestNetworkData() {
-        BaseRequest<ReviewDigestListJson> request = new BaseRequest<>(ReviewDigestListJson.class);
+        JsonRequest<ReviewDigestListJson> request = new JsonRequest<>(ReviewDigestListJson.class);
         request.setUrl(Config.getReviewDigestListUrl(page, size));
         spiceManager.getFromCacheAndLoadFromNetworkIfExpired(request,
                 "review_digest_list_page_" + page + "_size_" + size,
@@ -234,7 +234,7 @@ public class ReviewDigestListFragment extends Fragment implements OnScrollListen
 
     private void moreNetworkData() {
         int nextPage = page + 1;
-        BaseRequest<ReviewDigestListJson> request = new BaseRequest<>(ReviewDigestListJson.class);
+        JsonRequest<ReviewDigestListJson> request = new JsonRequest<>(ReviewDigestListJson.class);
         request.setUrl(Config.getReviewDigestListUrl(nextPage, size));
         spiceManager.execute(request, new RequestListener<ReviewDigestListJson>() {
             @Override

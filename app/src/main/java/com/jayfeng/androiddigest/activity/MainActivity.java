@@ -19,7 +19,7 @@ import com.jayfeng.androiddigest.fragment.BlogFragment;
 import com.jayfeng.androiddigest.fragment.HomeFragment;
 import com.jayfeng.androiddigest.fragment.ToolFragment;
 import com.jayfeng.androiddigest.service.HttpClientSpiceService;
-import com.jayfeng.androiddigest.webservices.BaseRequest;
+import com.jayfeng.androiddigest.webservices.JsonRequest;
 import com.jayfeng.androiddigest.webservices.json.UpdateJson;
 import com.jayfeng.lesscode.core.UpdateLess;
 import com.jayfeng.lesscode.core.ViewLess;
@@ -175,7 +175,7 @@ public class MainActivity extends BaseActivity
      */
 
     public void requestUpdateData() {
-        BaseRequest<UpdateJson> request = new BaseRequest<>(UpdateJson.class);
+        JsonRequest<UpdateJson> request = new JsonRequest<>(UpdateJson.class);
         request.setUrl(Config.getCheckUpdateUrl());
         spiceManager.execute(request, new RequestListener<UpdateJson>() {
             @Override

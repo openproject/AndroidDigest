@@ -29,7 +29,7 @@ import com.jayfeng.androiddigest.activity.WebViewActivity;
 import com.jayfeng.androiddigest.config.Config;
 import com.jayfeng.androiddigest.listener.Searchable;
 import com.jayfeng.androiddigest.service.HttpClientSpiceService;
-import com.jayfeng.androiddigest.webservices.BaseRequest;
+import com.jayfeng.androiddigest.webservices.JsonRequest;
 import com.jayfeng.androiddigest.webservices.json.DigestJson;
 import com.jayfeng.androiddigest.webservices.json.DigestListJson;
 import com.jayfeng.lesscode.core.AdapterLess;
@@ -150,7 +150,7 @@ public class DigestListFragment extends Fragment implements OnScrollListener, Se
      */
 
     private void requestNetworkData() {
-        BaseRequest<DigestListJson> request = new BaseRequest<>(DigestListJson.class);
+        JsonRequest<DigestListJson> request = new JsonRequest<>(DigestListJson.class);
         request.setUrl(getUrl(page, size));
         spiceManager.getFromCacheAndLoadFromNetworkIfExpired(request,
                 getCacheKey(page, size),
@@ -253,7 +253,7 @@ public class DigestListFragment extends Fragment implements OnScrollListener, Se
 
     private void moreNetworkData() {
         int nextPage = page + 1;
-        BaseRequest<DigestListJson> request = new BaseRequest<>(DigestListJson.class);
+        JsonRequest<DigestListJson> request = new JsonRequest<>(DigestListJson.class);
         request.setUrl(getUrl(nextPage, size));
         spiceManager.execute(request, new RequestListener<DigestListJson>() {
             @Override
