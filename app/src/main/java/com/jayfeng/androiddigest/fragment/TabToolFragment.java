@@ -23,13 +23,13 @@ import com.jayfeng.lesscode.core.ViewLess;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ToolFragment extends Fragment {
+public class TabToolFragment extends Fragment {
 
     private ListView listView;
     private List<ToolCategory> listData;
     private BaseAdapter adapter;
 
-    public ToolFragment() {
+    public TabToolFragment() {
         // Required empty public constructor
     }
 

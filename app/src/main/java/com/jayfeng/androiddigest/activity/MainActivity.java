@@ -15,9 +15,9 @@ import android.widget.RadioButton;
 
 import com.jayfeng.androiddigest.R;
 import com.jayfeng.androiddigest.config.Config;
-import com.jayfeng.androiddigest.fragment.BlogFragment;
-import com.jayfeng.androiddigest.fragment.HomeFragment;
-import com.jayfeng.androiddigest.fragment.ToolFragment;
+import com.jayfeng.androiddigest.fragment.TabBlogFragment;
+import com.jayfeng.androiddigest.fragment.TabHomeFragment;
+import com.jayfeng.androiddigest.fragment.TabToolFragment;
 import com.jayfeng.androiddigest.service.HttpClientSpiceService;
 import com.jayfeng.androiddigest.webservices.JsonRequest;
 import com.jayfeng.androiddigest.webservices.json.UpdateJson;
@@ -84,9 +84,9 @@ public class MainActivity extends BaseActivity
         toolTabBtn.setOnCheckedChangeListener(this);
         moreTabBtn.setOnClickListener(this);
 
-        currentFragment = homeFragment = new HomeFragment();
-        blogFragment = new BlogFragment();
-        toolFragment = new ToolFragment();
+        currentFragment = homeFragment = new TabHomeFragment();
+        blogFragment = new TabBlogFragment();
+        toolFragment = new TabToolFragment();
 
         initFragment();
     }

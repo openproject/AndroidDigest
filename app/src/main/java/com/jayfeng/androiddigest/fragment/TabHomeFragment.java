@@ -13,12 +13,12 @@ import com.jayfeng.androiddigest.R;
 import com.jayfeng.androiddigest.adapter.HomePagerAdapter;
 import com.jayfeng.lesscode.core.ViewLess;
 
-public class HomeFragment extends Fragment {
+public class TabHomeFragment extends Fragment {
 
     private ViewPager viewPager;
     private HomePagerAdapter pagerAdapter;
 
-    public HomeFragment() {
+    public TabHomeFragment() {
         // Required empty public constructor
     }
 

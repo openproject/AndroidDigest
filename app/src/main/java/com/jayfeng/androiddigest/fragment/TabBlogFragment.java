@@ -36,7 +36,7 @@ import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
-public class BlogFragment extends Fragment {
+public class TabBlogFragment extends Fragment {
 
     private SpiceManager spiceManager = new SpiceManager(HttpClientSpiceService.class);
 
@@ -49,7 +49,7 @@ public class BlogFragment extends Fragment {
 
     private String url;
 
-    public BlogFragment() {
+    public TabBlogFragment() {
         // Required empty public constructor
     }
 
