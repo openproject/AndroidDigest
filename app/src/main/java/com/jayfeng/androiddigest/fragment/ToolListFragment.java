@@ -24,12 +24,16 @@ import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.jayfeng.androiddigest.R;
 import com.jayfeng.androiddigest.activity.DigestDetailActivity;
+import com.jayfeng.androiddigest.activity.SearchActivity;
 import com.jayfeng.androiddigest.activity.WebViewActivity;
 import com.jayfeng.androiddigest.config.Config;
+import com.jayfeng.androiddigest.listener.Searchable;
 import com.jayfeng.androiddigest.service.HttpClientSpiceService;
 import com.jayfeng.androiddigest.webservices.JsonRequest;
 import com.jayfeng.androiddigest.webservices.json.DigestJson;
 import com.jayfeng.androiddigest.webservices.json.DigestListJson;
+import com.jayfeng.androiddigest.webservices.json.ToolJson;
+import com.jayfeng.androiddigest.webservices.json.ToolListJson;
 import com.jayfeng.lesscode.core.AdapterLess;
 import com.jayfeng.lesscode.core.ViewLess;
 import com.octo.android.robospice.SpiceManager;
@@ -43,12 +47,12 @@ import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
-public class ToolListFragment extends Fragment implements OnScrollListener {
+public class ToolListFragment extends Fragment implements OnScrollListener, Searchable {
 
     private SpiceManager spiceManager = new SpiceManager(HttpClientSpiceService.class);
 
     private ListView listView;
-    private List<DigestJson> listData;
+    private List<ToolJson> listData;
     private BaseAdapter adapter;
 
     private PtrClassicFrameLayout ptrFrame;
@@ -60,6 +64,9 @@ public class ToolListFragment extends Fragment implements OnScrollListener {
     private int page = Config.PAGE_START;
     private int size = Config.PAGE_SIZE;
 
+    private boolean isSearch = false;
+    private String searchKey;
+
     public ToolListFragment() {
         // Required empty public constructor
     }
@@ -67,6 +74,11 @@ public class ToolListFragment extends Fragment implements OnScrollListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (getArguments() != null
+                &&SearchActivity.TYPE_SEARCH.equals(getArguments().getString(SearchActivity.KEY_TYPE))) {
+            isSearch = true;
+        }
     }
 
     @Override
@@ -114,21 +126,11 @@ public class ToolListFragment extends Fragment implements OnScrollListener {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                DigestJson digestJson = listData.get(position);
-                String type = digestJson.getType();
-                if (Config.JOKE_TYPE_HTML.equals(type)) {
-                    String url = digestJson.getUrl();
-                    Intent intent = new Intent(getActivity(), WebViewActivity.class);
-//                    url = "http://www.baidu.com";
-                    intent.putExtra(WebViewActivity.KEY_URL, url);
-                    startActivity(intent);
-                } else {
-                    // default type text
-                    int detailId = digestJson.getId();
-                    Intent intent = new Intent(getActivity(), DigestDetailActivity.class);
-                    intent.putExtra(DigestDetailActivity.KEY_ID, detailId);
-                    startActivity(intent);
-                }
+                ToolJson toolJson = listData.get(position);
+                String url = toolJson.getUrl();
+                Intent intent = new Intent(getActivity(), WebViewActivity.class);
+                intent.putExtra(WebViewActivity.KEY_URL, url);
+                startActivity(intent);
             }
         });
     }
@@ -140,11 +142,11 @@ public class ToolListFragment extends Fragment implements OnScrollListener {
      */
 
     private void requestNetworkData() {
-        JsonRequest<DigestListJson> request = new JsonRequest<>(DigestListJson.class);
-        request.setUrl(Config.getDigestListUrl(page, size));
+        JsonRequest<ToolListJson> request = new JsonRequest<>(ToolListJson.class);
+        request.setUrl(getUrl(page, size));
         spiceManager.getFromCacheAndLoadFromNetworkIfExpired(request,
-                "digest_list_page_" + page + "_size_" + size,
-                DurationInMillis.NEVER, new RequestListener<DigestListJson>() {
+                getCacheKey(page, size),
+                DurationInMillis.NEVER, new RequestListener<ToolListJson>() {
                     @Override
                     public void onRequestFailure(SpiceException spiceException) {
                         ptrFrame.refreshComplete();
@@ -160,8 +162,8 @@ public class ToolListFragment extends Fragment implements OnScrollListener {
                     }
 
                     @Override
-                    public void onRequestSuccess(DigestListJson digestListJson) {
-                        fillAdapterToListView(digestListJson);
+                    public void onRequestSuccess(ToolListJson toolListJson) {
+                        fillAdapterToListView(toolListJson);
                         errorView.setVisibility(View.GONE);
                         ptrFrame.refreshComplete();
                     }
@@ -169,55 +171,40 @@ public class ToolListFragment extends Fragment implements OnScrollListener {
     }
 
     private void showCacheData() {
-        spiceManager.getFromCache(DigestListJson.class,
-                "digest_list_page_" + page + "_size_" + size,
-                DurationInMillis.ALWAYS_RETURNED, new RequestListener<DigestListJson>() {
+        spiceManager.getFromCache(ToolListJson.class,
+                getCacheKey(page, size),
+                DurationInMillis.ALWAYS_RETURNED, new RequestListener<ToolListJson>() {
                     @Override
                     public void onRequestFailure(SpiceException spiceException) {
                     }
 
                     @Override
-                    public void onRequestSuccess(DigestListJson digestListJson) {
-                        fillAdapterToListView(digestListJson);
+                    public void onRequestSuccess(ToolListJson toolListJson) {
+                        fillAdapterToListView(toolListJson);
                         resetPage();
                     }
                 });
     }
 
-    private void fillAdapterToListView(DigestListJson digestListJson) {
-        if (digestListJson == null) {
+    private void fillAdapterToListView(ToolListJson toolListJson) {
+        if (toolListJson == null) {
             return;
         }
-        listData = digestListJson;
+        listData = toolListJson;
         adapter = AdapterLess.$base(getActivity(),
                 listData,
-                R.layout.fragment_digest_list_item,
-                new AdapterLess.CallBack<DigestJson>() {
+                R.layout.activity_tool_list_item,
+                new AdapterLess.CallBack<ToolJson>() {
                     @Override
-                    public View getView(int i, View view, AdapterLess.ViewHolder viewHolder, DigestJson digestJson) {
+                    public View getView(int i, View view, AdapterLess.ViewHolder viewHolder, ToolJson toolJson) {
                         TextView titleView = viewHolder.$view(view, R.id.title);
-                        TextView abstractView = viewHolder.$view(view, R.id.abstracts);
+                        TextView descriptionView = viewHolder.$view(view, R.id.description);
                         SimpleDraweeView draweeView = viewHolder.$view(view,R.id.thumbnail);
-                        ImageView moreView = viewHolder.$view(view, R.id.more);
 
-                        if (TextUtils.isEmpty(digestJson.getTitle())) {
-                            titleView.setVisibility(View.GONE);
-                        } else {
-                            titleView.setText(digestJson.getTitle());
-                            TextPaint titlePaint = titleView.getPaint();
-                            titlePaint.setFakeBoldText(true);
-                            titleView.setVisibility(View.VISIBLE);
-                        }
-
-                        if (TextUtils.isEmpty(digestJson.getAbstractStr())) {
-                            abstractView.setVisibility(View.GONE);
-                        } else {
-                            abstractView.setText(digestJson.getAbstractStr());
-                            abstractView.setVisibility(View.VISIBLE);
-                        }
-
-                        if (!TextUtils.isEmpty(digestJson.getThumbnail())) {
-                            Uri uri = Uri.parse(digestJson.getThumbnail());
+                        titleView.setText(toolJson.getTitle());
+                        descriptionView.setText(toolJson.getDescription());
+                        if (!TextUtils.isEmpty(toolJson.getThumbnail())) {
+                            Uri uri = Uri.parse(toolJson.getThumbnail());
                             DraweeController controller = Fresco.newDraweeControllerBuilder()
                                     .setUri(uri)
                                     .setAutoPlayAnimations(true)
@@ -227,8 +214,6 @@ public class ToolListFragment extends Fragment implements OnScrollListener {
                         } else {
                             draweeView.setVisibility(View.GONE);
                         }
-
-                        moreView.setVisibility(digestJson.getMore() > 0 ? View.VISIBLE : View.GONE);
                         return view;
                     }
                 });
@@ -243,26 +228,26 @@ public class ToolListFragment extends Fragment implements OnScrollListener {
 
     private void moreNetworkData() {
         int nextPage = page + 1;
-        JsonRequest<DigestListJson> request = new JsonRequest<>(DigestListJson.class);
-        request.setUrl(Config.getDigestListUrl(nextPage, size));
-        spiceManager.execute(request, new RequestListener<DigestListJson>() {
+        JsonRequest<ToolListJson> request = new JsonRequest<>(ToolListJson.class);
+        request.setUrl(getUrl(nextPage, size));
+        spiceManager.execute(request, new RequestListener<ToolListJson>() {
             @Override
             public void onRequestFailure(SpiceException spiceException) {
             }
 
             @Override
-            public void onRequestSuccess(DigestListJson digestListJson) {
-                moreAdapterToListView(digestListJson);
+            public void onRequestSuccess(ToolListJson toolListJson) {
+                moreAdapterToListView(toolListJson);
             }
         });
     }
 
-    private void moreAdapterToListView(DigestListJson digestListJson) {
-        if (digestListJson == null) {
+    private void moreAdapterToListView(ToolListJson toolListJson) {
+        if (toolListJson == null) {
             return;
         }
-        listData.addAll(digestListJson);
-        if (digestListJson.size() < Config.PAGE_SIZE) {
+        listData.addAll(toolListJson);
+        if (toolListJson.size() < Config.PAGE_SIZE) {
             if (listView.getFooterViewsCount() > 0) {
                 listView.removeFooterView(footerView);
             }
@@ -279,6 +264,32 @@ public class ToolListFragment extends Fragment implements OnScrollListener {
         if (listView.getFooterViewsCount() == 0) {
             listView.addFooterView(footerView);
         }
+    }
+
+    /*
+     * =============================================================
+     * search page data
+     * =============================================================
+     */
+
+    @Override
+    public void search(String key) {
+        searchKey = key;
+
+        ptrFrame.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ptrFrame.autoRefresh();
+            }
+        }, 100);
+    }
+
+    private String getUrl(int page, int size) {
+        return Config.getSearchToolListUrl(searchKey, page, size);
+    }
+
+    private String getCacheKey(int page, int size) {
+        return (isSearch ? "search_" + searchKey + "_" : "") + "tool_list_page_" + page + "_size_" + size;
     }
 
     @Override

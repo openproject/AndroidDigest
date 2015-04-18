@@ -5,6 +5,8 @@ import com.google.api.client.http.HttpContent;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.UrlEncodedContent;
 import com.google.api.client.json.jackson2.JacksonFactory;
+import com.jayfeng.lesscode.core.FileLess;
+import com.jayfeng.lesscode.core.LogLess;
 import com.octo.android.robospice.request.googlehttpclient.GoogleHttpClientSpiceRequest;
 
 import java.io.IOException;
@@ -26,12 +28,14 @@ public class JsonRequest<T> extends GoogleHttpClientSpiceRequest<T> {
         GenericUrl genericUrl = new GenericUrl(url);
 
         if (postParameters == null) {
-            request = getHttpRequestFactory().buildGetRequest(genericUrl);
+            request = buildGetRequest(genericUrl);
         } else {
             HttpContent content = new UrlEncodedContent(postParameters);
             request = buildPostRequest(genericUrl, content);
         }
         request.setParser(new JacksonFactory().createJsonObjectParser());
+
+        LogLess.$d("json:" + FileLess.$read(request.execute().getContent()));
 
         return request.execute().parseAs(getResultType());
     }

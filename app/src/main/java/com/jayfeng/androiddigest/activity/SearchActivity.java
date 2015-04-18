@@ -72,6 +72,8 @@ public class SearchActivity extends BaseActivity
                 String key = searchEdit.getText().toString();
                 if (digestTabBtn.isChecked()) {
                     ((Searchable)digestFragment).search(key);
+                } else if (toolTabBtn.isChecked()) {
+                    ((Searchable)toolFragment).search(key);
                 }
             }
         });

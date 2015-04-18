@@ -180,7 +180,7 @@ public class DigestListFragment extends Fragment implements OnScrollListener, Se
 
     private void showCacheData() {
         spiceManager.getFromCache(DigestListJson.class,
-                (isSearch?"search":"") + "digest_list_page_" + page + "_size_" + size,
+                getCacheKey(page, size),
                 DurationInMillis.ALWAYS_RETURNED, new RequestListener<DigestListJson>() {
                     @Override
                     public void onRequestFailure(SpiceException spiceException) {
