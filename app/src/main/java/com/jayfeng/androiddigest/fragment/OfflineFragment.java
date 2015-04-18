@@ -36,7 +36,7 @@ import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
-public class OfflineFragment extends Fragment {
+public class OfflineFragment extends BaseFragment {
 
     private SpiceManager spiceManager = new SpiceManager(HttpClientSpiceService.class);
 

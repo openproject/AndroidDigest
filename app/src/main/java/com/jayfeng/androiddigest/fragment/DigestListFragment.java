@@ -45,7 +45,7 @@ import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
-public class DigestListFragment extends Fragment implements OnScrollListener, Searchable {
+public class DigestListFragment extends BaseFragment implements OnScrollListener, Searchable {
 
     private SpiceManager spiceManager = new SpiceManager(HttpClientSpiceService.class);
 

@@ -4,7 +4,6 @@ package com.jayfeng.androiddigest.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +35,7 @@ import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
-public class TabBlogFragment extends Fragment {
+public class TabBlogFragment extends BaseFragment {
 
     private SpiceManager spiceManager = new SpiceManager(HttpClientSpiceService.class);
 

@@ -13,7 +13,7 @@ import com.jayfeng.androiddigest.R;
 import com.jayfeng.androiddigest.adapter.HomePagerAdapter;
 import com.jayfeng.lesscode.core.ViewLess;
 
-public class TabHomeFragment extends Fragment {
+public class TabHomeFragment extends BaseFragment {
 
     private ViewPager viewPager;
     private HomePagerAdapter pagerAdapter;

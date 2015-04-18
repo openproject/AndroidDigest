@@ -23,7 +23,7 @@ import com.jayfeng.lesscode.core.ViewLess;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TabToolFragment extends Fragment {
+public class TabToolFragment extends BaseFragment {
 
     private ListView listView;
     private List<ToolCategory> listData;

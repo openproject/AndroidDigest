@@ -59,4 +59,5 @@ dependencies {
     }
     compile 'com.facebook.fresco:fresco:0.2.0'
     compile 'com.umeng:fb:5.1.0'
+    compile 'com.umeng.analytics:analytics:latest.integration'
 }

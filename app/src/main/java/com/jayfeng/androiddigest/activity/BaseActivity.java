@@ -5,6 +5,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.jayfeng.androiddigest.R;
+import com.umeng.analytics.MobclickAgent;
 
 public class BaseActivity extends ActionBarActivity {
 
@@ -29,5 +30,16 @@ public class BaseActivity extends ActionBarActivity {
 
     protected boolean showNavigationIcon() {
         return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

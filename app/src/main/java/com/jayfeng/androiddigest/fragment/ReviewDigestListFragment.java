@@ -42,7 +42,7 @@ import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
-public class ReviewDigestListFragment extends Fragment implements OnScrollListener {
+public class ReviewDigestListFragment extends BaseFragment implements OnScrollListener {
 
     private SpiceManager spiceManager = new SpiceManager(HttpClientSpiceService.class);
 
