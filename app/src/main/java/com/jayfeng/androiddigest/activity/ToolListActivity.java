@@ -92,7 +92,10 @@ public class ToolListActivity extends BaseActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String url = listData.get(position).getUrl();
+                String url = listData.get(position).getHomepage();
+                if (TextUtils.isEmpty(url)) {
+                    url = listData.get(position).getUrl();
+                }
                 Intent intent = new Intent(ToolListActivity.this, WebViewActivity.class);
                 intent.putExtra(WebViewActivity.KEY_URL, url);
                 startActivity(intent);
