@@ -70,9 +70,10 @@ public class SearchActivity extends BaseActivity
             @Override
             public void onClick(View v) {
                 String key = searchEdit.getText().toString();
-                if (digestTabBtn.isChecked()) {
-                    ((Searchable)digestFragment).search(key);
-                } else if (toolTabBtn.isChecked()) {
+                ((Searchable)digestFragment).search(key);
+                // if the toolFragment is not added
+                // it will crash when searching
+                if (toolFragment.isAdded()) {
                     ((Searchable)toolFragment).search(key);
                 }
             }
@@ -108,6 +109,19 @@ public class SearchActivity extends BaseActivity
                     changeFrament(digestFragment, TAG_DIGEST);
                     break;
                 case R.id.search_tool_btn:
+                    // if not search, to search when click the tool tab
+                    if (!toolFragment.isAdded()) {
+                        toolbar.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                String key = searchEdit.getText().toString();
+                                if (toolFragment.isAdded()) {
+                                    ((Searchable)toolFragment).search(key);
+                                }
+                            }
+                        },1000);
+
+                    }
                     changeFrament(toolFragment, TAG_TOOL);
                     break;
                 default:

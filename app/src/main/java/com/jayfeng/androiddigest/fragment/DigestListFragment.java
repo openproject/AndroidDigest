@@ -113,13 +113,15 @@ public class DigestListFragment extends BaseFragment implements OnScrollListener
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        showCacheData();
-        ptrFrame.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                ptrFrame.autoRefresh();
-            }
-        }, 100);
+        if (!isSearch) {
+            showCacheData();
+            ptrFrame.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    ptrFrame.autoRefresh();
+                }
+            }, 100);
+        }
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -129,7 +131,6 @@ public class DigestListFragment extends BaseFragment implements OnScrollListener
                 if (Config.JOKE_TYPE_HTML.equals(type)) {
                     String url = digestJson.getUrl();
                     Intent intent = new Intent(getActivity(), WebViewActivity.class);
-//                    url = "http://www.baidu.com";
                     intent.putExtra(WebViewActivity.KEY_URL, url);
                     startActivity(intent);
                 } else {
@@ -243,6 +244,12 @@ public class DigestListFragment extends BaseFragment implements OnScrollListener
                     }
                 });
         listView.setAdapter(adapter);
+        if (listData.size() < Config.PAGE_SIZE) {
+            if (listView.getFooterViewsCount() > 0) {
+                listView.removeFooterView(footerView);
+            }
+            noMoreData = true;
+        }
     }
 
     /*

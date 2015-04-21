@@ -115,13 +115,15 @@ public class ToolListFragment extends BaseFragment implements OnScrollListener, 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        showCacheData();
-        ptrFrame.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                ptrFrame.autoRefresh();
-            }
-        }, 100);
+        if (!isSearch) {
+            showCacheData();
+            ptrFrame.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    ptrFrame.autoRefresh();
+                }
+            }, 100);
+        }
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -218,6 +220,12 @@ public class ToolListFragment extends BaseFragment implements OnScrollListener, 
                     }
                 });
         listView.setAdapter(adapter);
+        if (listData.size() < Config.PAGE_SIZE) {
+            if (listView.getFooterViewsCount() > 0) {
+                listView.removeFooterView(footerView);
+            }
+            noMoreData = true;
+        }
     }
 
     /*
