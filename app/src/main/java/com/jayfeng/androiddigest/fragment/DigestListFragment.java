@@ -2,6 +2,7 @@ package com.jayfeng.androiddigest.fragment;
 
 
 import android.content.Intent;
+import android.graphics.drawable.Animatable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,9 +20,14 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.facebook.common.logging.FLog;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.controller.BaseControllerListener;
+import com.facebook.drawee.controller.ControllerListener;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.image.ImageInfo;
+import com.facebook.imagepipeline.image.QualityInfo;
 import com.jayfeng.androiddigest.R;
 import com.jayfeng.androiddigest.activity.DigestDetailActivity;
 import com.jayfeng.androiddigest.activity.SearchActivity;
@@ -33,6 +39,7 @@ import com.jayfeng.androiddigest.webservices.JsonRequest;
 import com.jayfeng.androiddigest.webservices.json.DigestJson;
 import com.jayfeng.androiddigest.webservices.json.DigestListJson;
 import com.jayfeng.lesscode.core.AdapterLess;
+import com.jayfeng.lesscode.core.DisplayLess;
 import com.jayfeng.lesscode.core.ViewLess;
 import com.octo.android.robospice.SpiceManager;
 import com.octo.android.robospice.persistence.DurationInMillis;
@@ -208,7 +215,7 @@ public class DigestListFragment extends BaseFragment implements OnScrollListener
                     public View getView(int i, View view, AdapterLess.ViewHolder viewHolder, DigestJson digestJson) {
                         TextView titleView = viewHolder.$view(view, R.id.title);
                         TextView abstractView = viewHolder.$view(view, R.id.abstracts);
-                        SimpleDraweeView draweeView = viewHolder.$view(view,R.id.thumbnail);
+                        final SimpleDraweeView draweeView = viewHolder.$view(view,R.id.thumbnail);
                         ImageView moreView = viewHolder.$view(view, R.id.more);
 
                         if (TextUtils.isEmpty(digestJson.getTitle())) {
@@ -229,7 +236,36 @@ public class DigestListFragment extends BaseFragment implements OnScrollListener
 
                         if (!TextUtils.isEmpty(digestJson.getThumbnail())) {
                             Uri uri = Uri.parse(digestJson.getThumbnail());
+                            ControllerListener controllerListener = new BaseControllerListener<ImageInfo>() {
+                                @Override
+                                public void onFinalImageSet(
+                                        String id,
+                                        @Nullable ImageInfo imageInfo,
+                                        @Nullable Animatable anim) {
+                                    if (imageInfo.getWidth() > imageInfo.getHeight()) {
+                                        draweeView.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
+                                    } else {
+                                        draweeView.getLayoutParams().width = DisplayLess.$dp2px(200);
+                                    }
+                                    draweeView.setAspectRatio((float) imageInfo.getWidth() / imageInfo.getHeight());
+                                }
+
+                                @Override
+                                public void onIntermediateImageSet(String id, @Nullable ImageInfo imageInfo) {
+                                    if (imageInfo.getWidth() > imageInfo.getHeight()) {
+                                        draweeView.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
+                                    } else {
+                                        draweeView.getLayoutParams().width = DisplayLess.$dp2px(200);
+                                    }
+                                    draweeView.setAspectRatio((float) imageInfo.getWidth() / imageInfo.getHeight());
+                                }
+
+                                @Override
+                                public void onFailure(String id, Throwable throwable) {
+                                }
+                            };
                             DraweeController controller = Fresco.newDraweeControllerBuilder()
+                                    .setControllerListener(controllerListener)
                                     .setUri(uri)
                                     .setAutoPlayAnimations(true)
                                     .build();

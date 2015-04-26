@@ -1,18 +1,24 @@
 package com.jayfeng.androiddigest.activity;
 
 import android.content.Intent;
+import android.graphics.drawable.Animatable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.controller.BaseControllerListener;
+import com.facebook.drawee.controller.ControllerListener;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.image.ImageInfo;
 import com.jayfeng.androiddigest.R;
 import com.jayfeng.androiddigest.config.Config;
 import com.jayfeng.androiddigest.service.HttpClientSpiceService;
@@ -20,6 +26,7 @@ import com.jayfeng.androiddigest.webservices.JsonRequest;
 import com.jayfeng.androiddigest.webservices.json.ToolJson;
 import com.jayfeng.androiddigest.webservices.json.ToolListJson;
 import com.jayfeng.lesscode.core.AdapterLess;
+import com.jayfeng.lesscode.core.DisplayLess;
 import com.jayfeng.lesscode.core.EncodeLess;
 import com.jayfeng.lesscode.core.ViewLess;
 import com.octo.android.robospice.SpiceManager;
@@ -165,13 +172,42 @@ public class ToolListActivity extends BaseActivity {
                     public View getView(int i, View view, AdapterLess.ViewHolder viewHolder, ToolJson toolJson) {
                         TextView titleView = viewHolder.$view(view, R.id.title);
                         TextView descriptionView = viewHolder.$view(view, R.id.description);
-                        SimpleDraweeView draweeView = viewHolder.$view(view,R.id.thumbnail);
+                        final SimpleDraweeView draweeView = viewHolder.$view(view,R.id.thumbnail);
 
                         titleView.setText(toolJson.getTitle());
                         descriptionView.setText(toolJson.getDescription());
                         if (!TextUtils.isEmpty(toolJson.getThumbnail())) {
                             Uri uri = Uri.parse(toolJson.getThumbnail());
+                            ControllerListener controllerListener = new BaseControllerListener<ImageInfo>() {
+                                @Override
+                                public void onFinalImageSet(
+                                        String id,
+                                        @Nullable ImageInfo imageInfo,
+                                        @Nullable Animatable anim) {
+                                    if (imageInfo.getWidth() > imageInfo.getHeight()) {
+                                        draweeView.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
+                                    } else {
+                                        draweeView.getLayoutParams().width = DisplayLess.$dp2px(200);
+                                    }
+                                    draweeView.setAspectRatio((float) imageInfo.getWidth() / imageInfo.getHeight());
+                                }
+
+                                @Override
+                                public void onIntermediateImageSet(String id, @Nullable ImageInfo imageInfo) {
+                                    if (imageInfo.getWidth() > imageInfo.getHeight()) {
+                                        draweeView.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
+                                    } else {
+                                        draweeView.getLayoutParams().width = DisplayLess.$dp2px(200);
+                                    }
+                                    draweeView.setAspectRatio((float) imageInfo.getWidth() / imageInfo.getHeight());
+                                }
+
+                                @Override
+                                public void onFailure(String id, Throwable throwable) {
+                                }
+                            };
                             DraweeController controller = Fresco.newDraweeControllerBuilder()
+                                    .setControllerListener(controllerListener)
                                     .setUri(uri)
                                     .setAutoPlayAnimations(true)
                                     .build();
