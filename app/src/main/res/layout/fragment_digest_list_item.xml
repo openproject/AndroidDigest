@@ -1,28 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/light_grey">
 
-    <LinearLayout android:id="@+id/container"
+    <LinearLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp"
-        android:orientation="vertical">
+        android:layout_margin="6dp"
+        android:background="@drawable/selectable_background"
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:textStyle="bold"
             android:textSize="16sp"
-            android:visibility="gone" />
+            android:textStyle="bold"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/abstracts"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/thumbnail"
@@ -31,11 +36,12 @@
             fresco:placeholderImage="@mipmap/ic_launcher"
             />
 
-        <ImageView android:id="@+id/more"
+        <ImageView
+            android:id="@+id/more"
             android:layout_width="8dp"
             android:layout_height="8dp"
-            android:src="@mipmap/list_item_more"
-            android:layout_gravity="right"/>
+            android:layout_gravity="right"
+            android:src="@mipmap/list_item_more"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -1,12 +1,14 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <in.srain.cube.views.ptr.PtrClassicFrameLayout xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"
+    <in.srain.cube.views.ptr.PtrClassicFrameLayout
         android:id="@+id/fragment_rotate_header_with_listview_frame"
+        xmlns:cube_ptr="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#fff"
+        android:background="@color/light_grey"
         cube_ptr:ptr_duration_to_close="200"
         cube_ptr:ptr_duration_to_close_header="200"
         cube_ptr:ptr_keep_header_when_refresh="true"
@@ -26,15 +28,16 @@
                 android:divider="@null"
                 android:fadingEdge="none"
                 android:listSelector="?android:attr/listChoiceBackgroundIndicator"
-                android:scrollbarStyle="outsideOverlay" />
+                android:scrollbarStyle="outsideOverlay"/>
 
-            <TextView android:id="@+id/error"
+            <TextView
+                android:id="@+id/error"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:visibility="gone"
-                android:text="加载失败，下拉重试."/>
+                android:text="加载失败，下拉重试."
+                android:visibility="gone"/>
         </FrameLayout>
 
     </in.srain.cube.views.ptr.PtrClassicFrameLayout>
