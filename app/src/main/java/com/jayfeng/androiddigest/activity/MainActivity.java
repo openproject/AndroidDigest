@@ -68,6 +68,9 @@ public class MainActivity extends BaseActivity
             getWindow().setNavigationBarColor(getResources().getColor(R.color.primary_dark));
         }
 
+        //add this to optimize OverDraw
+        this.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
         fragmentManager = getSupportFragmentManager();
 
         init();
