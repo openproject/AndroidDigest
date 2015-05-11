@@ -13,7 +13,7 @@
 > 1. 订阅
 
 ##Screenshot
-![app-0.2-screenshot](https://raw.githubusercontent.com/openproject/AndroidDigest/master/release/screenshot-0.2.png)
+![screenshot](release/Screen_Capture.png)
 
 ##Demo
 [下载地址](http://jayfeng-files.stor.sinaapp.com/androiddigest/app-release-0.3.apk)
