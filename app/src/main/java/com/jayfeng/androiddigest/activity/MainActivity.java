@@ -1,6 +1,7 @@
 package com.jayfeng.androiddigest.activity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -61,6 +62,11 @@ public class MainActivity extends BaseActivity
         toolbar.setNavigationIcon(R.mipmap.ic_launcher);
         toolbar.setSubtitle(R.string.app_description);
         toolbar.setSubtitleTextColor(getResources().getColor(android.R.color.white));
+
+        //set navigationBar color for Android 5.0 or above
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setNavigationBarColor(getResources().getColor(R.color.primary_dark));
+        }
 
         fragmentManager = getSupportFragmentManager();
 
