@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MetrTheme">
         <!-- Customize your theme here. -->
     </style>
 
@@ -13,5 +13,11 @@
         <item name="android:gravity">center</item>
         <item name="android:button">@null</item>
         <item name="android:textColor">@color/tab_item_text_color</item>
+    </style>
+
+    <style name="Theme.MetrTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
     </style>
 </resources>
