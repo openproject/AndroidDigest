@@ -9,7 +9,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextPaint;
 import android.text.TextUtils;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -53,6 +55,8 @@ import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
 public class DigestListFragment extends BaseFragment implements OnScrollListener, Searchable {
+
+    private static final int CONTEXT_ITEM_OPEN_IN_BROWSER = 0;
 
     private SpiceManager spiceManager = new SpiceManager(HttpClientSpiceService.class);
 
@@ -110,10 +114,11 @@ public class DigestListFragment extends BaseFragment implements OnScrollListener
 
             @Override
             public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
-                return PtrDefaultHandler.checkContentCanBePulledDown(frame, listView, header) ;
+                return PtrDefaultHandler.checkContentCanBePulledDown(frame, listView, header);
             }
         });
 
+        registerForContextMenu(listView);
         return contentView;
     }
 
@@ -135,7 +140,7 @@ public class DigestListFragment extends BaseFragment implements OnScrollListener
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 DigestJson digestJson = listData.get(position);
                 String type = digestJson.getType();
-                if (Config.JOKE_TYPE_HTML.equals(type)) {
+                if (Config.DIGEST_TYPE_HTML.equals(type)) {
                     String url = digestJson.getUrl();
                     Intent intent = new Intent(getActivity(), WebViewActivity.class);
                     intent.putExtra(WebViewActivity.KEY_URL, url);
@@ -376,6 +381,32 @@ public class DigestListFragment extends BaseFragment implements OnScrollListener
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
         visibleLastIndex = firstVisibleItem + visibleItemCount - 1;
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        menu.setHeaderTitle("More");
+        menu.add(0, CONTEXT_ITEM_OPEN_IN_BROWSER, 0, "Open in browser");
+        super.onCreateContextMenu(menu, v, menuInfo);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        switch (item.getItemId()) {
+            case CONTEXT_ITEM_OPEN_IN_BROWSER:
+                DigestJson digestJson = listData.get(menuInfo.position);
+                String type = digestJson.getType();
+                if (Config.DIGEST_TYPE_HTML.equals(type)) {
+                    Intent intent = new Intent();
+                    intent.setAction("android.intent.action.VIEW");
+                    Uri content_url = Uri.parse(digestJson.getUrl());
+                    intent.setData(content_url);
+                    startActivity(intent);
+                }
+                return true;
+        }
+        return super.onContextItemSelected(item);
     }
 
     @Override

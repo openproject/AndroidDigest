@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -23,6 +25,7 @@ import com.jayfeng.androiddigest.R;
 import com.jayfeng.androiddigest.config.Config;
 import com.jayfeng.androiddigest.service.HttpClientSpiceService;
 import com.jayfeng.androiddigest.webservices.JsonRequest;
+import com.jayfeng.androiddigest.webservices.json.OfflineJson;
 import com.jayfeng.androiddigest.webservices.json.ToolJson;
 import com.jayfeng.androiddigest.webservices.json.ToolListJson;
 import com.jayfeng.lesscode.core.AdapterLess;
@@ -41,6 +44,8 @@ import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
 public class ToolListActivity extends BaseActivity {
+
+    private static final int CONTEXT_ITEM_OPEN_IN_BROWSER = 0;
 
     public static final String KEY_TITLE = "title";
     public static final String KEY_TYPE = "type";
@@ -108,6 +113,7 @@ public class ToolListActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+        registerForContextMenu(listView);
     }
 
     /*
@@ -228,6 +234,33 @@ public class ToolListActivity extends BaseActivity {
 
     private String getCacheKey() {
         return EncodeLess.$md5(getListUrl());
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        menu.setHeaderTitle("More");
+        menu.add(0, CONTEXT_ITEM_OPEN_IN_BROWSER, 0, "Open in browser");
+        super.onCreateContextMenu(menu, v, menuInfo);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        switch (item.getItemId()) {
+            case CONTEXT_ITEM_OPEN_IN_BROWSER:
+                ToolJson toolJson = listData.get(menuInfo.position);
+                String url = toolJson.getHomepage();
+                if (TextUtils.isEmpty(url)) {
+                    url = toolJson.getUrl();
+                }
+                Intent intent = new Intent();
+                intent.setAction("android.intent.action.VIEW");
+                Uri content_url = Uri.parse(url);
+                intent.setData(content_url);
+                startActivity(intent);
+                return true;
+        }
+        return super.onContextItemSelected(item);
     }
 
     @Override

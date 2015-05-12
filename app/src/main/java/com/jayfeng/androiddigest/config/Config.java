@@ -11,8 +11,8 @@ public class Config {
     public static final int PAGE_SIZE = 15;
     public static final int PAGE_START = 1;
 
-    public static final String JOKE_TYPE_TEXT = "text";
-    public static final String JOKE_TYPE_HTML = "html";
+    public static final String DIGEST_TYPE_TEXT = "text";
+    public static final String DIGEST_TYPE_HTML = "html";
 
 
     public static final String BLOG_TYPE_HEADER = "header";
