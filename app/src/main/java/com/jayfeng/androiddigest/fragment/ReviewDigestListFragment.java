@@ -113,6 +113,9 @@ public class ReviewDigestListFragment extends BaseFragment implements OnScrollLi
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (position < 0 || position >= listData.size()) {
+                    return;
+                }
                 ReviewDigestJson reviewDigestJson = listData.get(position);
                 String url = reviewDigestJson.getUrl();
                 if (!TextUtils.isEmpty(url)) {

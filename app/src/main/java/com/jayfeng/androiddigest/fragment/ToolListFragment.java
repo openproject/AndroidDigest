@@ -128,6 +128,9 @@ public class ToolListFragment extends BaseFragment implements OnScrollListener, 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (position < 0 || position >= listData.size()) {
+                    return;
+                }
                 ToolJson toolJson = listData.get(position);
                 String url = toolJson.getUrl();
                 Intent intent = new Intent(getActivity(), WebViewActivity.class);

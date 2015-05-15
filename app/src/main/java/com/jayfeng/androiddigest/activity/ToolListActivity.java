@@ -104,6 +104,9 @@ public class ToolListActivity extends BaseActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (position < 0 || position >= listData.size()) {
+                    return;
+                }
                 String url = listData.get(position).getHomepage();
                 if (TextUtils.isEmpty(url)) {
                     url = listData.get(position).getUrl();

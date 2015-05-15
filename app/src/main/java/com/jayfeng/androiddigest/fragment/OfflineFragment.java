@@ -99,6 +99,9 @@ public class OfflineFragment extends BaseFragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (position < 0 || position >= listData.size()) {
+                    return;
+                }
                 String type = listData.get(position).getType();
                 String url = listData.get(position).getUrl();
                 String title = listData.get(position).getTitle();
