@@ -2,6 +2,7 @@ package com.jayfeng.androiddigest.fragment;
 
 
 import android.content.Intent;
+import android.graphics.drawable.Animatable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,8 +21,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.controller.BaseControllerListener;
+import com.facebook.drawee.controller.ControllerListener;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.image.ImageInfo;
 import com.jayfeng.androiddigest.R;
 import com.jayfeng.androiddigest.activity.DigestDetailActivity;
 import com.jayfeng.androiddigest.activity.SearchActivity;
@@ -35,6 +39,7 @@ import com.jayfeng.androiddigest.webservices.json.DigestListJson;
 import com.jayfeng.androiddigest.webservices.json.ToolJson;
 import com.jayfeng.androiddigest.webservices.json.ToolListJson;
 import com.jayfeng.lesscode.core.AdapterLess;
+import com.jayfeng.lesscode.core.DisplayLess;
 import com.jayfeng.lesscode.core.ViewLess;
 import com.octo.android.robospice.SpiceManager;
 import com.octo.android.robospice.persistence.DurationInMillis;
@@ -131,8 +136,12 @@ public class ToolListFragment extends BaseFragment implements OnScrollListener, 
                 if (position < 0 || position >= listData.size()) {
                     return;
                 }
+
                 ToolJson toolJson = listData.get(position);
-                String url = toolJson.getUrl();
+                String url = toolJson.getHomepage();
+                if (TextUtils.isEmpty(url)) {
+                    url = toolJson.getUrl();
+                }
                 Intent intent = new Intent(getActivity(), WebViewActivity.class);
                 intent.putExtra(WebViewActivity.KEY_URL, url);
                 startActivity(intent);
@@ -204,13 +213,42 @@ public class ToolListFragment extends BaseFragment implements OnScrollListener, 
                     public View getView(int i, View view, AdapterLess.ViewHolder viewHolder, ToolJson toolJson) {
                         TextView titleView = viewHolder.$view(view, R.id.title);
                         TextView descriptionView = viewHolder.$view(view, R.id.description);
-                        SimpleDraweeView draweeView = viewHolder.$view(view,R.id.thumbnail);
+                        final SimpleDraweeView draweeView = viewHolder.$view(view,R.id.thumbnail);
 
                         titleView.setText(toolJson.getTitle());
                         descriptionView.setText(toolJson.getDescription());
                         if (!TextUtils.isEmpty(toolJson.getThumbnail())) {
                             Uri uri = Uri.parse(toolJson.getThumbnail());
+                            ControllerListener controllerListener = new BaseControllerListener<ImageInfo>() {
+                                @Override
+                                public void onFinalImageSet(
+                                        String id,
+                                        @Nullable ImageInfo imageInfo,
+                                        @Nullable Animatable anim) {
+                                    if (imageInfo.getWidth() > imageInfo.getHeight()) {
+                                        draweeView.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
+                                    } else {
+                                        draweeView.getLayoutParams().width = DisplayLess.$dp2px(200);
+                                    }
+                                    draweeView.setAspectRatio((float) imageInfo.getWidth() / imageInfo.getHeight());
+                                }
+
+                                @Override
+                                public void onIntermediateImageSet(String id, @Nullable ImageInfo imageInfo) {
+                                    if (imageInfo.getWidth() > imageInfo.getHeight()) {
+                                        draweeView.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
+                                    } else {
+                                        draweeView.getLayoutParams().width = DisplayLess.$dp2px(200);
+                                    }
+                                    draweeView.setAspectRatio((float) imageInfo.getWidth() / imageInfo.getHeight());
+                                }
+
+                                @Override
+                                public void onFailure(String id, Throwable throwable) {
+                                }
+                            };
                             DraweeController controller = Fresco.newDraweeControllerBuilder()
+                                    .setControllerListener(controllerListener)
                                     .setUri(uri)
                                     .setAutoPlayAnimations(true)
                                     .build();
