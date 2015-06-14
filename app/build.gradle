@@ -6,10 +6,10 @@ android {
 
     defaultConfig {
         applicationId "com.jayfeng.androiddigest"
-        minSdkVersion 15
+        minSdkVersion 11
         targetSdkVersion 22
-        versionCode 3
-        versionName "0.3"
+        versionCode 4
+        versionName "V0.5"
     }
 
     signingConfigs {
@@ -38,7 +38,7 @@ android {
         variant.outputs.each { output ->
             output.outputFile = new File(
                     output.outputFile.parent,
-                    output.outputFile.name.replace(".apk", "-${variant.versionName}.apk"))
+                    "android_digest_${variant.buildType.name}_${variant.versionName}.apk".toLowerCase())
         }
     }
 }
@@ -46,8 +46,8 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.1.1'
-    compile 'com.jayfeng:lesscode-core:0.4.2'
-    compile 'in.srain.cube:ultra-ptr:1.0.9'
+    compile 'com.jayfeng:lesscode-core:0.4.4'
+    compile 'in.srain.cube:ultra-ptr:1.0.10'
     compile('com.octo.android.robospice:robospice-google-http-client:1.4.14') {
         exclude(group: 'org.apache.httpcomponents', module: 'httpclient') //by both name and group
     }

@@ -3,20 +3,17 @@
 
 ##Next plan
 
-###0.4
-> 1. 搜索
-
-###0.5
-> 1. 设置模块
-
 ###0.6
-> 1. 订阅
+> 1. 采用Material Design
+
+###0.7
+> 1. 重构Server端
 
 ##Screenshot
 ![screenshot](release/Screen_Capture.png)
 
 ##Demo
-[下载地址](http://jayfeng-files.stor.sinaapp.com/androiddigest/app-release-0.3.apk)
+[下载地址](http://jayfeng-files.stor.sinaapp.com/androiddigest/android_digest_release_v0.5.apk)
 
 ##编译
 1. 复制gradle.properties.release为gradle.properties或者把里面的内容拷贝到你的gradle.properties，可解决编译时需要release的singingConfig的错误
