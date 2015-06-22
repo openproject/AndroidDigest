@@ -1,0 +1,123 @@
+[{
+    "title" : "开发社区(每日更新)",
+    "type" : "header"
+},{
+    "title" : "Android开发 - 博客园",
+    "description":"代码改变世界",
+    "type" : "html",
+    "url" : "http://www.cnblogs.com/cate/android/"
+},{
+    "title" : "Android热门博客列表 - ITeye博客频道",
+    "type" : "html",
+    "url" : "http://www.iteye.com/blogs/tag/Android"
+},{
+    "title" : "Android开发专区 - 开源中国",
+    "type" : "html",
+    "url" : "http://www.oschina.net/android/1/android?type=3&sort=time"
+},{
+    "title" : "AndroidCN：Android专业中文社区",
+    "type" : "html",
+    "url" : "http://www.androidcn.org"
+},{
+    "title" : "android周报(每周更新)",
+    "type" : "header"
+},{
+    "title" : "Android开发技术周报",
+    "type" : "html",
+    "url" : "http://www.androidweekly.cn"
+},{
+    "title" : "Android周报",
+    "description":"Coding, thoughts. @Android笔记",
+    "type" : "html",
+    "url" : "http://www.race604.com"
+},{
+    "title" : "Android开发技术前线",
+    "type" : "html",
+    "url" : "https://github.com/bboyfeiyu/android-tech-frontier"
+},{
+    "title" : "App开发日报",
+    "type" : "html",
+    "url" : "http://app.memect.com"
+},{
+    "title" : "电子书",
+    "type" : "header"
+},{
+    "title" : "皮皮书屋 - 备份",
+    "type" : "html",
+    "url" : "http://bt8.nl/ebook.php?book=android"
+},{
+    "title" : "知名博客(不定时更新)",
+    "type" : "header"
+},{
+    "title" : "codeKK 开源项目源码分析",
+    "type" : "html",
+    "url" : "http://www.codekk.com"
+},{
+    "title" : "代码家",
+    "description":"我想写个好的App…",
+    "type" : "html",
+    "url" : "http://blog.daimajia.com"
+},{
+    "title" : "Android 科学院 - 知乎专栏",
+    "type" : "html",
+    "url" : "http://zhuanlan.zhihu.com/andlib"
+},{
+    "title" : "Android开源项目分类汇总",
+    "type" : "html",
+    "url" : "https://github.com/Trinea/android-open-project"
+},{
+    "title" : "郭霖的专栏",
+    "description":"每当你在感叹，如果有这样一个东西就好了的时候，请注意，其实这是你的机会",
+    "type" : "html",
+    "url" : "http://blog.csdn.net/guolin_blog"
+},{
+    "title" : "Drakeet的个人博客",
+    "description":"平平凡凡的，追求优雅的代码",
+    "type" : "html",
+    "url" : "http://drakeet.me"
+},{
+    "title" : "老罗的Android之旅",
+    "description":"爱生活，爱Android",
+    "type" : "html",
+    "url" : "http://blog.csdn.net/luoshengyang"
+},{
+    "title" : "Android Performance",
+    "description":"Android,Performance",
+    "type" : "html",
+    "url" : "http://androidperformance.com"
+},{
+    "title" : "云在千峰",
+    "description":"About Java Android Web Dart etc …",
+    "type" : "html",
+    "url" : "http://blog.chengyunfeng.com/"
+},{
+    "title" : "宋宝华的blog",
+    "type" : "html",
+    "url" : "http://blog.csdn.net/21cnbao"
+},{
+    "title" : "谦虚的天下",
+    "type" : "html",
+    "url" : "http://www.cnblogs.com/qianxudetianxia/"
+},{
+    "title" : "设计交互",
+    "type" : "header"
+},{
+    "title" : "materialup",
+    "type" : "html",
+    "url" : "http://www.materialup.com"
+},{
+    "title" : "国外网站",
+    "type" : "header"
+},{
+    "title" : "Stack Overflow",
+    "description":"Newest 'android' Questions - Stack Overflow",
+    "type" : "html",
+    "url" : "http://stackoverflow.com/questions/tagged/android"
+},{
+    "title" : "Android Weekly",
+    "description":"Android Weekly is a free newsletter that helps you to stay cutting-edge with your Android Development.",
+    "type" : "html",
+    "url" : "http://androidweekly.net"
+}
+
+]
