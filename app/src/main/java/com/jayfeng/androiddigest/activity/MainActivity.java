@@ -59,9 +59,7 @@ public class MainActivity extends BaseActivity
         setContentView(R.layout.activity_main);
 
         showToolbar();
-        toolbar.setNavigationIcon(R.mipmap.ic_launcher);
-        toolbar.setSubtitle(R.string.app_description);
-        toolbar.setSubtitleTextColor(getResources().getColor(android.R.color.white));
+        toolbar.setTitle(R.string.app_description);
 
         //set navigationBar color for Android 5.0 or above
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
