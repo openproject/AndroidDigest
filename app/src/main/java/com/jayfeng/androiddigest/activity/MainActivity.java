@@ -58,8 +58,7 @@ public class MainActivity extends BaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        showToolbar();
-        toolbar.setTitle(R.string.app_description);
+        showToolbar(getString(R.string.app_description));
 
         //set navigationBar color for Android 5.0 or above
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

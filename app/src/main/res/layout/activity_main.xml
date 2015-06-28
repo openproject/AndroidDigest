@@ -9,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
-        android:background="#45b39c"
+        android:background="@color/primary"
+        android:title="@string/app_description"
         android:minHeight="@dimen/abc_action_bar_default_height_material" />
 
     <RadioGroup

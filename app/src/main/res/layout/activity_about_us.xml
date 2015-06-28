@@ -8,8 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
-        android:background="#008AC4"
-        android:minHeight="?attr/actionBarSize" />
+        android:background="@color/primary"
+        android:minHeight="@dimen/abc_action_bar_default_height_material" />
 
     <LinearLayout
         android:layout_width="wrap_content"
