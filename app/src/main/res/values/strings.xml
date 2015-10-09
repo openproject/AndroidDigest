@@ -14,6 +14,7 @@
     <string name="tab_tool_text">工具箱</string>
     <string name="tab_more_text">更多</string>
     <string name="tab_more_menu_setting">设置</string>
+    <string name="tab_more_menu_developers">开发小组</string>
     <string name="title_activity_joke_detail">正文</string>
     <string name="title_activity_web_view">正文</string>
     <string name="title_activity_offline">离线列表</string>
@@ -49,6 +50,18 @@
     <string name="settings_wipe_cache_description">当前缓存: </string>
     <string name="settings_about_us_title">关于</string>
     <string name="settings_about_us_description">关于干柴</string>
+
+    <string name="settings_about_developers_feng_details_realname">冯建</string>
+    <string name="settings_about_developers_feng_details_name">昵称：谦虚的天下</string>
+    <string name="settings_about_developers_feng_details_blog">博客地址：http://cnblogs.com/qianxudetianxia</string>
+    <string name="settings_about_developers_feng_details_qq">QQ：673592063</string>
+    <string name="settings_about_developers_feng_details_weibo">微博地址：http://weibo.com/xiaofengjian?from=profile&amp;wvr=6</string>
+
+    <string name="settings_about_developers_gracker_details_realname">高建武</string>
+    <string name="settings_about_developers_gracker_details_name">昵称：Gracker</string>
+    <string name="settings_about_developers_gracker_details_blog">博客地址：http://androidperformance.com</string>
+    <string name="settings_about_developers_gracker_details_qq">QQ：553000664</string>
+    <string name="settings_about_developers_gracker_details_weibo">微博地址：http://www.weibo.com/u/1315612820?from=feed&amp;loc=nickname</string>
 
     <string name="about_us_title">关于</string>
 </resources>

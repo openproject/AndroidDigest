@@ -12,4 +12,7 @@
         android:id="@+id/more_menu_setting"
         android:title="@string/tab_more_menu_setting"/>
 
+    <item
+        android:id="@+id/more_menu_developers"
+        android:title="@string/tab_more_menu_developers"/>
 </menu>
