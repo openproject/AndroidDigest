@@ -2,6 +2,7 @@ package com.jayfeng.androiddigest.activity;
 
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.jayfeng.androiddigest.R;
@@ -12,7 +13,14 @@ public class BaseActivity extends ActionBarActivity {
     protected Toolbar toolbar;
 
     protected void showToolbar() {
+        showToolbar(null);
+    }
+
+    protected void showToolbar(String title) {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if (!TextUtils.isEmpty(title)) {
+            toolbar.setTitle(title);
+        }
         toolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
         toolbar.showOverflowMenu();
         setSupportActionBar(toolbar);

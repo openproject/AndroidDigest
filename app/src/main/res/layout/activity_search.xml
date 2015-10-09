@@ -10,8 +10,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_gravity="left"
-        android:background="#008AC4"
-        android:minHeight="?attr/actionBarSize">
+        android:background="@color/primary"
+        android:minHeight="@dimen/abc_action_bar_default_height_material">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -23,13 +23,16 @@
                 android:layout_centerVertical="true"
                 android:singleLine="true"
                 android:hint="请输入你要搜索的关键字"
+                android:textColorHint="#8fff"
                 android:textColor="#fff"/>
 
             <ImageView android:id="@+id/search_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:layout_alignParentRight="true"
-                android:src="@mipmap/menu_search"/>
+                android:src="@mipmap/menu_search"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"/>
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 

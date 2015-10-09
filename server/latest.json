@@ -1,0 +1,6 @@
+{
+    "vercode":4,
+    "vername":"0.5",
+    "download":"http://jayfeng-files.stor.sinaapp.com/androiddigest/android_digest_release_v0.5.apk",
+    "log":"1. [增加]设置模块\n2. [增加]搜索功能\n3. [增加]集成了友盟统计\n4. [修复]重构了网络请求的代码，极大的精简优化了SpiceRequest的使用方式\n5. [修复]改善了工具箱的UI\n6. [修复]优化了列表中图片的展示效果\n7. [修复]修复了大量的其他bug"
+}
