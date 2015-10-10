@@ -2,9 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jayfeng.androiddigest" >
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -17,11 +17,11 @@
 
         <!-- config the umeng parameters -->
         <meta-data
-            android:value="5527fcbbfd98c5d7d2000383"
-            android:name="UMENG_APPKEY"/>
+            android:name="UMENG_APPKEY"
+            android:value="5527fcbbfd98c5d7d2000383" />
         <meta-data
-            android:value="official"
-            android:name="UMENG_CHANNEL"/>
+            android:name="UMENG_CHANNEL"
+            android:value="official" />
 
         <activity
             android:name=".activity.MainActivity"
@@ -59,16 +59,16 @@
             android:name=".activity.SearchActivity"
             android:label="@string/title_activity_search" >
         </activity>
-
-        <activity android:name=".activity.SettingsActivity"
-            android:label="@string/settings_title"/>
-
-        <activity android:name=".activity.AboutUsActivity"
-            android:label="@string/about_us_title"/>
-        <!-- umeng feedback activity -->
         <activity
-            android:name="com.umeng.fb.ConversationActivity"/>
-
+            android:name=".activity.SettingsActivity"
+            android:label="@string/settings_title" />
+        <activity
+            android:name=".activity.AboutUsActivity"
+            android:label="@string/about_us_title" />
+        <!-- umeng feedback activity -->
+        <activity android:name="com.umeng.fb.ConversationActivity" />
+        <activity android:name=".activity.DeveloperActivity" >
+        </activity>
     </application>
 
 </manifest>

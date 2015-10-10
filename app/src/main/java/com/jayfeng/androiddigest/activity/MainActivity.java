@@ -158,8 +158,14 @@ public class MainActivity extends BaseActivity
                         agent.startFeedbackActivity();
                         break;
                     case R.id.more_menu_setting:
-                        Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-                        startActivity(intent);
+                        Intent settingsIntent = new Intent(MainActivity.this, SettingsActivity.class);
+                        startActivity(settingsIntent);
+                        break;
+                    case R.id.more_menu_developers:
+                        Intent developerIntent = new Intent(MainActivity.this, DeveloperActivity.class);
+                        startActivity(developerIntent);
+                        break;
+                    default:
                         break;
                 }
                 return true;
